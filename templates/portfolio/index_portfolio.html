@@ -1237,113 +1237,38 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Certificate Card 1 -->
+                {% for certification in certifications %}
                 <div class="glass rounded-[20px] p-6 card-hover">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fab fa-google text-white text-xl"></i>
+                        <div class="w-12 h-12 rounded-full {% if certification.icon_color and '#' not in certification.icon_color %}bg-{{ certification.icon_color }}/20{% else %}bg-accent-purple/20{% endif %} flex items-center justify-center flex-shrink-0">
+                            {% if certification.icon %}
+                            <i class="{{ certification.icon }} text-white text-xl {% if certification.icon_color and '#' in certification.icon_color %}" style="color: {{ certification.icon_color }};"{% endif %}"></i>
+                            {% else %}
+                            <i class="fas fa-certificate text-white text-xl"></i>
+                            {% endif %}
                         </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                        {% if certification.credential_url %}
+                        <a href="{{ certification.credential_url }}" target="_blank" rel="noopener noreferrer" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
                             View <i class="fas fa-external-link-alt text-xs"></i>
                         </a>
+                        {% endif %}
                     </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">Google Data Analytics Professional Certificate</h3>
-                    <p class="text-text-secondary text-sm mb-2">Google</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: January 2024</p>
+                    <h3 class="font-semibold text-white text-lg mb-2">{{ certification.get_title }}</h3>
+                    <p class="text-text-secondary text-sm mb-2">{{ certification.issuer }}</p>
+                    {% if certification.issue_date %}
+                    <p class="text-text-secondary text-xs mb-4">Issued: {{ certification.issue_date|date:"F Y" }}</p>
+                    {% endif %}
+                    {% if certification.get_description %}
                     <p class="text-text-secondary text-sm leading-relaxed">
-                        Professional certification in data analysis and visualization, covering SQL, R, Tableau, and data-driven decision making.
+                        {{ certification.get_description }}
                     </p>
+                    {% endif %}
                 </div>
-
-                <!-- Certificate Card 2 -->
-                <div class="glass rounded-[20px] p-6 card-hover">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fab fa-python text-white text-xl"></i>
-                        </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            View <i class="fas fa-external-link-alt text-xs"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">Python for Data Science and Machine Learning</h3>
-                    <p class="text-text-secondary text-sm mb-2">Udemy</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: August 2023</p>
-                    <p class="text-text-secondary text-sm leading-relaxed">
-                        Comprehensive training on Python programming for data science, machine learning, and deep learning with TensorFlow and Keras.
-                    </p>
+                {% empty %}
+                <div class="col-span-full text-center text-text-secondary py-12">
+                    <p>No certifications available at the moment.</p>
                 </div>
-
-                <!-- Certificate Card 3 -->
-                <div class="glass rounded-[20px] p-6 card-hover">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fab fa-aws text-white text-xl"></i>
-                        </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            View <i class="fas fa-external-link-alt text-xs"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">AWS Certified Machine Learning - Specialty</h3>
-                    <p class="text-text-secondary text-sm mb-2">Amazon Web Services</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: June 2024</p>
-                    <p class="text-text-secondary text-sm leading-relaxed">
-                        Certified in designing, implementing, deploying, and maintaining machine learning solutions on AWS.
-                    </p>
-                </div>
-
-                <!-- Certificate Card 4 -->
-                <div class="glass rounded-[20px] p-6 card-hover">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-brain text-white text-xl"></i>
-                        </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            View <i class="fas fa-external-link-alt text-xs"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">Deep Learning Specialization</h3>
-                    <p class="text-text-secondary text-sm mb-2">DeepLearning.AI (Coursera)</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: March 2024</p>
-                    <p class="text-text-secondary text-sm leading-relaxed">
-                        Mastered neural networks, deep learning, and how to apply it in computer vision, NLP, and more.
-                    </p>
-                </div>
-
-                <!-- Certificate Card 5 -->
-                <div class="glass rounded-[20px] p-6 card-hover">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fab fa-microsoft text-white text-xl"></i>
-                        </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            View <i class="fas fa-external-link-alt text-xs"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">Microsoft Certified: Azure Data Scientist Associate</h3>
-                    <p class="text-text-secondary text-sm mb-2">Microsoft</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: November 2023</p>
-                    <p class="text-text-secondary text-sm leading-relaxed">
-                        Certified in applying Azure's machine learning techniques to train, evaluate, and deploy models.
-                    </p>
-                </div>
-
-                <!-- Certificate Card 6 -->
-                <div class="glass rounded-[20px] p-6 card-hover">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-database text-white text-xl"></i>
-                        </div>
-                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
-                            View <i class="fas fa-external-link-alt text-xs"></i>
-                        </a>
-                    </div>
-                    <h3 class="font-semibold text-white text-lg mb-2">SQL for Data Science</h3>
-                    <p class="text-text-secondary text-sm mb-2">University of California, Davis (Coursera)</p>
-                    <p class="text-text-secondary text-xs mb-4">Issued: September 2023</p>
-                    <p class="text-text-secondary text-sm leading-relaxed">
-                        Mastered SQL fundamentals for data science, including queries, joins, subqueries, and data analysis.
-                    </p>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -1681,12 +1606,14 @@
                 ],
                 description: "{{ project.get_description|escapejs }}",
                 techStack: [
-                    {% for tech in project.technologies.all %}
+                    {% for tech_link in project.technologies.all %}
+                    {% with tech=tech_link.technology %}
                     { 
                         name: "{{ tech.name|escapejs }}", 
                         icon: '{{ tech.icon|escapejs }}',
                         iconColor: "{{ tech.icon_color|escapejs }}"
                     }{% if not forloop.last %},{% endif %}
+                    {% endwith %}
                     {% endfor %}
                 ],
                 liveUrl: "{{ project.live_url|default:'#'|escapejs }}",
