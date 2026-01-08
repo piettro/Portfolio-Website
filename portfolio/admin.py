@@ -28,7 +28,7 @@ class ProjectImageInline(admin.TabularInline):
 
 class SkillInline(admin.TabularInline):
     model = Skill
-    fields = ['name', 'name_en', 'name_es', 'experience_years', 'percentage', 'icon', 'icon_color', 'order']
+    fields = ['name', 'name_en', 'name_es', 'experience_years', 'percentage', 'icon', 'icon_color', 'order', 'description', 'description_en', 'description_es']
     extra = 1
 
 @admin.register(Experience)
@@ -36,7 +36,7 @@ class ExperienceAdmin(admin.ModelAdmin):
     list_display = ['title', 'company', 'start_period', 'end_period', 'order']
     fields = [
         'title', 'title_en', 'title_es',
-        'company', 'company_logo', 'company_logo_bg',
+        'company',  'company_logo_image',
         'start_period', 'end_period',
         'location', 'work_type',
         'description', 'description_en', 'description_es',

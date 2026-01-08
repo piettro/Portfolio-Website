@@ -24,7 +24,7 @@ def index(request):
     experiences = Experience.objects.all().prefetch_related('achievements', 'technologies').order_by('-start_period')
     skill_categories = SkillCategory.objects.all().prefetch_related('skills')
     core_competencies = CoreCompetency.objects.all()
-    certifications = Certification.objects.all()
+    certifications = Certification.objects.all().order_by('order')
     hobbies = Hobby.objects.all()
     featured_blog_post = BlogPost.objects.filter(featured=True).first()
     

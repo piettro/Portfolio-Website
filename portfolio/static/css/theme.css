@@ -1,6 +1,6 @@
 :root {
   --bg-primary: #0a0a0a;
-  --bg-secondary: #0b0218;
+  --bg-secondary: #1c1b1d;
   --text-primary: #ededed;
   --text-secondary: #a3a3a3;
   --accent-purple: #a855f7;
@@ -246,7 +246,7 @@ html {
 
 /* Footer Styles */
 footer {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
 }
 
 footer a {
@@ -255,7 +255,7 @@ footer a {
 
 /* Light theme footer styles */
 body.light footer {
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
 }
 
 body.light footer .text-white {

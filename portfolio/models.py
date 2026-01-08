@@ -7,8 +7,7 @@ class Experience(models.Model):
     title_es = models.CharField(max_length=200, blank=True)
     
     company = models.CharField(max_length=200)
-    company_logo = models.CharField(max_length=10, blank=True, help_text="Single character or icon code for logo")
-    company_logo_bg = models.CharField(max_length=50, default='bg-blue-600', help_text="Tailwind bg color class")
+    company_logo_image = models.URLField(blank=True, help_text="URL for company logo image")
     
     start_period = models.DateField()
     end_period = models.DateField(blank=True, null=True)
