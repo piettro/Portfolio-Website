@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piettro Rodrigues - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0b0218;
+            --text-primary: #ededed;
+            --text-secondary: #a3a3a3;
+            --accent-purple: #a855f7;
+            --accent-teal: #14b8a6;
+            --accent-red: #ef4444;
+        }
+
+        /* Light Theme Variables */
+        body.light {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+        }
+
+        body.light .glass {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light .nav-fixed.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light .language-menu {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light .language-option {
+            color: var(--text-primary);
+        }
+
+        body.light .language-option:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.light .language-option.active {
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-purple);
+        }
+
+        body.light .control-button {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light .control-button:hover {
+            background: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body.light .control-button.active {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: var(--accent-purple);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Typewriter Animation - Infinite Loop */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent-purple);
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            animation: typing 8s steps(20, end) infinite, blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% { 
+                width: 0; 
+            }
+            40% { 
+                width: 100%; 
+            }
+            50% { 
+                width: 100%; 
+            }
+            65% { 
+                width: 100%; 
+            }
+            90% { 
+                width: 0; 
+            }
+            100% { 
+                width: 0; 
+            }
+        }
+
+        @keyframes blink-caret {
+            from, to { 
+                border-right-color: var(--accent-purple); 
+            }
+            50% { 
+                border-right-color: transparent; 
+            }
+        }
+
+        /* Animated Low-Poly Background */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .polygon-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        .polygon {
+            position: absolute;
+            opacity: 0.7;
+            animation: drift 35s ease-in-out infinite;
+            filter: blur(0.5px);
+        }
+
+        .polygon-1 {
+            top: 10%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(20, 184, 166, 0.1));
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 0s;
+        }
+
+        .polygon-2 {
+            top: 60%;
+            right: 15%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(225deg, rgba(20, 184, 166, 0.08), rgba(168, 85, 247, 0.08));
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation-delay: -5s;
+        }
+
+        .polygon-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, rgba(168, 85, 247, 0.12), rgba(239, 68, 68, 0.08));
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation-delay: -10s;
+        }
+
+        .polygon-4 {
+            top: 30%;
+            right: 30%;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(315deg, rgba(20, 184, 166, 0.1), rgba(168, 85, 247, 0.1));
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            animation-delay: -15s;
+        }
+
+        .polygon-5 {
+            bottom: 40%;
+            right: 10%;
+            width: 220px;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(168, 85, 247, 0.1));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: -20s;
+        }
+
+        .polygon-6 {
+            top: 50%;
+            left: 5%;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(45deg, rgba(20, 184, 166, 0.1), rgba(168, 85, 247, 0.08));
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+            animation-delay: -25s;
+        }
+
+        /* Additional smaller polygons for texture */
+        .polygon-7 {
+            top: 25%;
+            right: 40%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.06), rgba(20, 184, 166, 0.06));
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation-delay: -8s;
+            opacity: 0.5;
+        }
+
+        .polygon-8 {
+            bottom: 30%;
+            left: 40%;
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(270deg, rgba(239, 68, 68, 0.05), rgba(168, 85, 247, 0.05));
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            animation-delay: -18s;
+            opacity: 0.4;
+        }
+
+        .polygon-9 {
+            top: 70%;
+            right: 25%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, rgba(20, 184, 166, 0.07), rgba(168, 85, 247, 0.07));
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            animation-delay: -12s;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            66% {
+                transform: translateY(10px) rotate(-5deg);
+            }
+        }
+
+        @keyframes drift {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translate(30px, -30px) rotate(90deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-20px, 20px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translate(20px, 30px) rotate(270deg);
+                opacity: 0.7;
+            }
+        }
+
+        /* Geometric Pattern Overlay */
+        .geometric-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px);
+            background-size: 40px 40px;
+            animation: patternMove 60s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% {
+                background-position: 0 0, 0 0;
+            }
+            100% {
+                background-position: 40px 40px, -40px -40px;
+            }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card Hover Effect */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Gradient Text */
+        .gradient-text-purple {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-teal {
+            background: linear-gradient(135deg, var(--accent-teal), #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Timeline Line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-purple), var(--accent-teal));
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-purple);
+            border: 3px solid var(--bg-primary);
+            z-index: 10;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-teal);
+        }
+
+        /* Filter Button Active */
+        .filter-btn.active {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        /* Skill Bar Animation */
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+
+        .skill-bar-fill {
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        /* Top Right Controls (Language & Theme) */
+        .top-right-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 60;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .top-right-controls {
+                top: 15px;
+                right: 15px;
+                gap: 10px;
+            }
+        }
+
+        .control-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .control-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .control-button.active {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: var(--accent-purple);
+        }
+
+        .control-icon {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Navigation Fixed */
+        .nav-fixed {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            background: transparent;
+            backdrop-filter: blur(0px);
+            border: none;
+            transition: all 0.3s ease;
+            width: auto;
+            max-width: 90%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-fixed {
+                top: 10px;
+                max-width: 95%;
+            }
+        }
+
+        .nav-fixed.scrolled {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            padding: 0;
+            top: 10px;
+        }
+
+        .nav-fixed.scrolled .nav-container {
+            padding: 0.5rem 1.5rem;
+        }
+
+        .nav-container {
+            transition: padding 0.3s ease;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-fixed .nav-container {
+                padding: 0.5rem 1rem;
+            }
+            
+            .nav-fixed.scrolled .nav-container {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* Language Selector Dropdown */
+        .language-dropdown {
+            position: relative;
+        }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .language-option.active {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--accent-purple);
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        /* Modal Styles */
+        #projectModal {
+            display: none;
+        }
+
+        #projectModal.show {
+            display: flex !important;
+        }
+
+        .modal-overlay {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar for Modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+
+        /* Carousel Styles */
+        #modalCarousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-image-container {
+            flex-shrink: 0;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .carousel-indicator.active {
+            background: var(--accent-purple);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--bg-primary);
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        /* Hide projects beyond first 6 by default */
+        .project-card.hidden-by-default {
+            display: none;
+        }
+
+        .project-card.show-all {
+            display: block !important;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': '#0a0a0a',
+                        'bg-secondary': '#0b0218',
+                        'accent-purple': '#a855f7',
+                        'accent-teal': '#14b8a6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bg-primary text-text-primary antialiased">
+
+    <!-- Top Right Controls (Language & Theme) -->
+    <div class="top-right-controls">
+        <!-- Language Selector -->
+        <div class="language-dropdown">
+            <button id="languageBtn" onclick="toggleLanguageMenu()" class="control-button">
+                <span id="currentLanguageFlag" class="control-icon text-xl">🇺🇸</span>
+            </button>
+            <div id="languageMenu" class="language-menu">
+                <div class="language-option active" onclick="changeLanguage('en')">
+                    <span class="text-xl">🇺🇸</span>
+                    <span>English</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('es')">
+                    <span class="text-xl">🇪🇸</span>
+                    <span>Español</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('pt')">
+                    <span class="text-xl">🇧🇷</span>
+                    <span>Português</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="control-button active" id="themeToggle" onclick="toggleTheme()">
+            <i class="fas fa-moon control-icon" id="themeIcon"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-fixed" id="mainNav">
+        <div class="nav-container">
+            <div class="flex items-center justify-center gap-8 px-6 py-3">
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-white hover:text-accent-purple transition-colors text-sm font-medium">Home</a>
+                    <a href="#about" class="text-white hover:text-accent-purple transition-colors text-sm font-medium">About</a>
+                    <a href="#projects" class="text-white hover:text-accent-purple transition-colors text-sm font-medium">Work</a>
+                    <a href="#projects" class="text-white hover:text-accent-purple transition-colors text-sm font-medium">Projects</a>
+                    <a href="#contact" class="text-white hover:text-accent-purple transition-colors text-sm font-medium">Contact</a>
+                </div>
+
+                <!-- Download CV Button -->
+                <div class="hidden md:flex items-center ml-8">
+                    <a href="/static/downloads/CV Piettro Rodrigues EN.pdf" 
+                       id="downloadCVBtn"
+                       download 
+                       class="px-6 py-2 rounded-full bg-accent-purple hover:bg-purple-600 text-white text-sm font-semibold transition-all hover:scale-105 flex items-center gap-2">
+                        <i class="fas fa-download"></i>
+                        Download CV
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 overflow-hidden">
+        <!-- Animated Background -->
+        <div class="hero-background">
+            <div class="geometric-pattern"></div>
+            <div class="polygon-container">
+                <div class="polygon polygon-1"></div>
+                <div class="polygon polygon-2"></div>
+                <div class="polygon polygon-3"></div>
+                <div class="polygon polygon-4"></div>
+                <div class="polygon polygon-5"></div>
+                <div class="polygon polygon-6"></div>
+                <div class="polygon polygon-7"></div>
+                <div class="polygon polygon-8"></div>
+                <div class="polygon polygon-9"></div>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center max-w-4xl mx-auto">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4">
+                Hi, I'm <span class="gradient-text-purple">{{ profile_info.name|default:"Piettro" }}</span>
+            </h1>
+            <div class="text-2xl sm:text-3xl md:text-4xl font-light text-text-secondary min-h-[3rem] flex items-center justify-center">
+                <span class="typewriter inline-block">{{ profile_info.title|default:"Data Scientist & Quantitative Research" }}</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                <span class="inline-block" style="background: linear-gradient(90deg, #a855f7, #14b8a6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Featured Projects
+                </span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+                A collection of projects I've worked on. Each project represents a unique challenge 
+                and showcases different aspects of my skills and expertise.
+            </p>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="all">
+                    All
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="data-science">
+                    Data Science
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="web">
+                    Web Development
+                </button>
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="ai">
+                    AI/ML
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="projects-grid">
+                {% for project in projects %}
+                <div class="glass rounded-[20px] p-6 card-hover project-card cursor-pointer {% if forloop.counter > 6 %}hidden-by-default{% endif %}" 
+                     data-type="{{ project.project_type }}" 
+                     data-project="{{ project.id }}"
+                     onclick="openProjectModal({{ project.id }})">
+                    <!-- Project Icon/Logo -->
+                    <div class="mb-4">
+                        {% if project.logo_url %}
+                        <div class="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
+                            <img src="{{ project.logo_url }}" alt="{{ project.get_title }}" class="w-full h-full object-cover">
+                        </div>
+                        {% elif project.logo_bg_gradient %}
+                        <div class="w-14 h-14 rounded-lg bg-gradient-to-br {{ project.logo_bg_gradient }} flex items-center justify-center">
+                            {% if project.logo_text %}
+                            <span class="text-white text-2xl font-bold">{{ project.logo_text }}</span>
+                            {% else %}
+                            <span class="text-white text-2xl font-bold">{{ project.get_title|first|upper }}</span>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="w-14 h-14 rounded-lg bg-accent-purple/20 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-accent-purple text-2xl"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- Project Title -->
+                    <h3 class="font-bold text-xl mb-2">{{ project.get_title|default:project.title }}</h3>
+                    <!-- Tech Stack Label -->
+                    <p class="text-xs text-text-secondary mb-3">Tech Stack</p>
+                    <!-- Technology Icons -->
+                    <div class="flex gap-3 mb-4 flex-wrap">
+                        {% for tech in project.technologies.all|slice:":5" %}
+                        {% if tech.icon %}
+                        <i class="{{ tech.icon }} text-2xl {% if tech.icon_color and '#' not in tech.icon_color %}text-{{ tech.icon_color }}{% endif %}" {% if tech.icon_color and '#' in tech.icon_color %}style="color: {{ tech.icon_color }};"{% endif %} title="{{ tech.name }}"></i>
+                        {% else %}
+                        <span class="text-xs text-text-secondary px-2 py-1 rounded glass">{{ tech.name }}</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- Description -->
+                    <p class="text-text-secondary mb-6 text-sm leading-relaxed">
+                        {{ project.get_description|default:project.description|truncatewords:20 }}
+                    </p>
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3">
+                        {% if project.live_url %}
+                        <button class="flex-1 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2" 
+                                onclick="event.stopPropagation(); window.open('{{ project.live_url }}', '_blank');">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </button>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <button class="px-4 py-2 rounded-lg glass border border-white/10 hover:border-white/20 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2" 
+                                onclick="event.stopPropagation(); window.open('{{ project.github_url }}', '_blank');">
+                            <i class="fab fa-github"></i>
+                            Code
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-span-full text-center text-text-secondary py-12">
+                    <p>No projects available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- View All Projects Button -->
+            <div class="text-center mt-12">
+                <button id="viewAllProjectsBtn" 
+                        onclick="toggleAllProjects()"
+                        class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple text-white font-semibold transition-all hover:scale-105 flex items-center gap-2 mx-auto">
+                    <span id="viewAllText">View All Projects</span>
+                    <i id="viewAllIcon" class="fas fa-chevron-down transition-transform"></i>
+                </button>
+            </div>
+
+            <div class="text-center mt-12 space-y-6">
+                <p class="text-text-secondary text-lg">
+                    Interested in working together?
+                </p>
+                <button class="px-8 py-3 rounded-full text-white font-semibold transition-all hover:scale-105" 
+                        style="background: linear-gradient(135deg, #a855f7, #3b82f6);">
+                    Get In Touch
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" onclick="closeProjectModal()">
+        <div class="modal-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div class="modal-content relative bg-bg-primary rounded-[20px] max-w-3xl w-full max-h-[90vh] overflow-y-auto glass border border-white/10 shadow-2xl" 
+             onclick="event.stopPropagation()">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-bg-primary/95 backdrop-blur-sm border-b border-white/10 rounded-t-[20px] z-10">
+                <!-- Close Button -->
+                <div class="absolute top-4 right-4 z-20">
+                    <button onclick="closeProjectModal()" class="w-10 h-10 rounded-full glass border border-white/10 hover:border-accent-red hover:bg-accent-red/10 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="relative w-full h-64 md:h-80 overflow-hidden rounded-t-[20px]">
+                    <div id="modalCarousel" class="flex transition-transform duration-500 ease-in-out h-full">
+                        <!-- Images will be inserted here -->
+                    </div>
+                    
+                    <!-- Carousel Navigation -->
+                    <button id="carouselPrev" onclick="changeCarouselImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="carouselNext" onclick="changeCarouselImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Carousel Indicators -->
+                    <div id="carouselIndicators" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                        <!-- Indicators will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Title and Subtitle -->
+                <div class="p-6">
+                    <h2 id="modalTitle" class="text-3xl font-bold mb-2"></h2>
+                    <p id="modalType" class="text-text-secondary text-lg"></p>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 space-y-6">
+                <!-- Description -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Description</h3>
+                    <p id="modalDescription" class="text-text-secondary leading-relaxed"></p>
+                </div>
+
+                <!-- Tech Stack -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Tech Stack</h3>
+                    <div id="modalTechStack" class="flex flex-wrap gap-3">
+                        <!-- Tech icons will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="flex gap-4 pt-4 border-t border-white/10">
+                    <button id="modalLiveBtn" class="flex-1 px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-external-link-alt"></i>
+                        View Live Demo
+                    </button>
+                    <button id="modalCodeBtn" class="flex-1 px-6 py-3 rounded-lg glass border border-white/10 hover:border-white/20 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+                        <i class="fab fa-github"></i>
+                        View Code on GitHub
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8 bg-bg-secondary">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">
+                Professional <span class="gradient-text-purple">Journey</span>
+            </h2>
+
+            <div class="relative">
+                <div class="timeline-line"></div>
+                
+                {% for experience in experiences %}
+                <div class="relative mb-16 experience-card" data-index="{{ forloop.counter0 }}" {% if forloop.counter > 3 %}style="display: none;"{% endif %}>
+                    <div class="timeline-dot top-8"></div>
+                    <div class="{% if forloop.counter|divisibleby:2 %}ml-0 md:ml-[55%]{% else %}mr-0 md:mr-[55%]{% endif %} glass rounded-[20px] p-6 card-hover">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 rounded-lg {{ experience.company_logo_bg }} flex items-center justify-center flex-shrink-0">
+                                {% if experience.company_logo %}
+                                <span class="text-white text-xs font-bold uppercase">{{ experience.company_logo }}</span>
+                                {% else %}
+                                <i class="{{ experience.icon }} text-white text-xl"></i>
+                                {% endif %}
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-xl font-semibold text-white mb-2">{{ experience.get_title|default:experience.title }}</h3>
+                                <p class="{% if experience.icon_color %}text-{{ experience.icon_color }}{% else %}text-blue-400{% endif %} mb-3">{{ experience.company }}</p>
+                                <div class="flex flex-wrap items-center gap-4 text-text-secondary text-sm mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-calendar text-xs"></i>
+                                        <span>{{ experience.period_display }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-globe text-xs"></i>
+                                        <span>{{ experience.location_display }}</span>
+                                    </div>
+                                </div>
+                                <p class="text-text-secondary text-sm mb-4">
+                                    {{ experience.get_description|default:experience.description|truncatewords:30 }}
+                                </p>
+                                <button class="{% if experience.icon_color %}text-{{ experience.icon_color }}{% else %}text-blue-400{% endif %} text-sm hover:underline flex items-center gap-2 toggle-details" data-id="exp{{ experience.id }}">
+                                    <span>Show More</span>
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </button>
+                                <div id="exp{{ experience.id }}-details" class="hidden mt-6 space-y-6">
+                                    <!-- Key Achievements Section -->
+                                    {% if experience.achievements.all %}
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                                            <i class="fas fa-bolt text-yellow-400"></i>
+                                            <span>Key Achievements</span>
+                                        </h4>
+                                        <ul class="list-disc list-inside text-text-secondary text-sm space-y-2 ml-2">
+                                            {% for achievement in experience.achievements.all %}
+                                            <li>{{ achievement.get_text|default:achievement.text }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                    <!-- Technologies Used Section -->
+                                    {% if experience.technologies.all %}
+                                    <div>
+                                        <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                                            <i class="fas fa-laptop text-blue-400"></i>
+                                            <span>Technologies Used</span>
+                                        </h4>
+                                        <div class="flex flex-wrap gap-2">
+                                            {% for tech in experience.technologies.all %}
+                                            <span class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs flex items-center gap-2 text-white">
+                                                {% if tech.icon %}
+                                                <i class="{{ tech.icon }} {% if tech.icon_color and '#' not in tech.icon_color %}text-{{ tech.icon_color }}{% endif %}" {% if tech.icon_color and '#' in tech.icon_color %}style="color: {{ tech.icon_color }};"{% endif %}></i>
+                                                {% endif %}
+                                                {{ tech.name }}
+                                            </span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center text-text-secondary py-12">
+                    <p>No experiences available at the moment.</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- View All Button -->
+            <div class="text-center mt-12">
+                <button id="viewAllExperiencesBtn" onclick="toggleAllExperiences()" 
+                        class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple text-white transition-all">
+                    View All Experiences
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Technical Expertise Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <!-- Main Title -->
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                Skills <span class="gradient-text-purple">&amp; Tech Stack</span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+                Advanced expertise in Data Science, Machine Learning, and AI-driven solutions.
+            </p>
+
+            <!-- Core Competencies -->
+            <div class="mb-16">
+                <h3 class="text-2xl md:text-3xl font-semibold text-center mb-2">
+                    Core <span class="text-emerald-400">Competencies</span>
+                </h3>
+                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm">
+                    Essential soft skills and core capabilities that drive my professional excellence.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for competency in core_competencies %}
+                    <div class="glass rounded-[20px] p-6 card-hover">
+                        <div class="w-16 h-16 rounded-lg {{ competency.icon_bg_color }} flex items-center justify-center mb-4">
+                            <i class="{{ competency.icon }} text-2xl {% if competency.icon_color %}text-{{ competency.icon_color }}{% endif %}"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">{{ competency.get_name|default:competency.name }}</h4>
+                        <p class="text-text-secondary text-sm">{{ competency.get_description|default:competency.description }}</p>
+                    </div>
+                    {% empty %}
+                    <div class="col-span-full text-center text-text-secondary py-12">
+                        <p>No competencies available at the moment.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Technical Expertise -->
+            <div>
+                <h3 class="text-2xl md:text-3xl font-semibold text-center mb-2">
+                    Technical <span class="text-emerald-400">Expertise</span>
+                </h3>
+                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm">
+                    Comprehensive technical skills across various domains with proficiency levels.
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {% for category in skill_categories %}
+                    <div class="glass rounded-[20px] p-6 card-hover">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-lg bg-accent-purple/20 flex items-center justify-center">
+                                <i class="{{ category.icon }} text-accent-purple"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">{{ category.get_name|default:category.name }}</h4>
+                        </div>
+                        <div class="space-y-4">
+                            {% for skill in category.skills.all %}
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        {% if skill.icon %}
+                                        <i class="{{ skill.icon }} {% if skill.icon_color and '#' not in skill.icon_color %}text-{{ skill.icon_color }}{% endif %}" {% if skill.icon_color and '#' in skill.icon_color %}style="color: {{ skill.icon_color }};"{% endif %}></i>
+                                        {% endif %}
+                                        <span class="font-medium">{{ skill.get_name|default:skill.name }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        {% if skill.experience_years %}
+                                        <span class="px-2 py-1 rounded-full bg-white/5 border border-white/10 text-xs">{{ skill.experience_years }}</span>
+                                        {% endif %}
+                                        <span class="text-text-secondary text-sm font-medium">{{ skill.percentage }}%</span>
+                                    </div>
+                                </div>
+                                <div class="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                                    <div class="h-full rounded-full skill-bar-fill" style="width: {{ skill.percentage }}%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-teal));"></div>
+                                </div>
+                                {% if skill.description %}
+                                <p class="text-text-secondary text-xs mt-1">{{ skill.get_description|default:skill.description }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-span-full text-center text-text-secondary py-12">
+                        <p>No skills available at the moment.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                About <span class="gradient-text-purple">Me</span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+                Crafting data-driven solutions & intelligent systems.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Left Column - Text -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Background</h3>
+                    <div class="text-text-secondary space-y-4">
+                        <p>
+                            I'm a passionate Data Scientist with over 5 years of experience in transforming raw data into actionable insights. 
+                            My journey started with a fascination for patterns and predictions, which led me to specialize in machine learning, 
+                            data engineering, and business intelligence.
+                        </p>
+                        <p>
+                            I've worked with various industries, from healthcare to finance, helping organizations leverage their data to make 
+                            informed decisions. My expertise spans the entire data science lifecycle, from data collection and cleaning to model 
+                            deployment and monitoring.
+                        </p>
+                        <p>
+                            Beyond technical skills, I'm passionate about continuous learning and staying updated with the latest trends in AI and 
+                            data science. I enjoy sharing knowledge through blog posts, speaking at conferences, and mentoring aspiring data scientists.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column - Expertise Areas -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass rounded-[20px] p-6 card-hover text-center">
+                        <div class="w-12 h-12 rounded-lg bg-accent-purple/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-chart-line text-accent-purple text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Data Analytics</h4>
+                        <p class="text-xs text-text-secondary">Statistical analysis and insights</p>
+                    </div>
+
+                    <div class="glass rounded-[20px] p-6 card-hover text-center">
+                        <div class="w-12 h-12 rounded-lg bg-accent-teal/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-cogs text-accent-teal text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Problem Solver</h4>
+                        <p class="text-xs text-text-secondary">Creative solutions</p>
+                    </div>
+
+                    <div class="glass rounded-[20px] p-6 card-hover text-center">
+                        <div class="w-12 h-12 rounded-lg bg-accent-red/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-users text-accent-red text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Team Player</h4>
+                        <p class="text-xs text-text-secondary">Collaborative mindset</p>
+                    </div>
+
+                    <div class="glass rounded-[20px] p-6 card-hover text-center">
+                        <div class="w-12 h-12 rounded-lg bg-accent-purple/20 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-brain text-accent-purple text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">AI Expert</h4>
+                        <p class="text-xs text-text-secondary">ML & Deep Learning</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                <button class="px-8 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors">
+                    <i class="fas fa-download mr-2"></i>Download CV
+                </button>
+                <button class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors">
+                    Contact Me
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-bg-secondary">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                <span class="gradient-text-purple">Certificates</span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12">
+                Professional certifications and courses I've completed
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Certificate Card 1 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-google text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Google Data Analytics Professional Certificate</h3>
+                    <p class="text-text-secondary text-sm mb-2">Google</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: January 2024</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Professional certification in data analysis and visualization, covering SQL, R, Tableau, and data-driven decision making.
+                    </p>
+                </div>
+
+                <!-- Certificate Card 2 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-python text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Python for Data Science and Machine Learning</h3>
+                    <p class="text-text-secondary text-sm mb-2">Udemy</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: August 2023</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Comprehensive training on Python programming for data science, machine learning, and deep learning with TensorFlow and Keras.
+                    </p>
+                </div>
+
+                <!-- Certificate Card 3 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-aws text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">AWS Certified Machine Learning - Specialty</h3>
+                    <p class="text-text-secondary text-sm mb-2">Amazon Web Services</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: June 2024</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Certified in designing, implementing, deploying, and maintaining machine learning solutions on AWS.
+                    </p>
+                </div>
+
+                <!-- Certificate Card 4 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Deep Learning Specialization</h3>
+                    <p class="text-text-secondary text-sm mb-2">DeepLearning.AI (Coursera)</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: March 2024</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Mastered neural networks, deep learning, and how to apply it in computer vision, NLP, and more.
+                    </p>
+                </div>
+
+                <!-- Certificate Card 5 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-microsoft text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">Microsoft Certified: Azure Data Scientist Associate</h3>
+                    <p class="text-text-secondary text-sm mb-2">Microsoft</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: November 2023</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Certified in applying Azure's machine learning techniques to train, evaluate, and deploy models.
+                    </p>
+                </div>
+
+                <!-- Certificate Card 6 -->
+                <div class="glass rounded-[20px] p-6 card-hover">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-database text-white text-xl"></i>
+                        </div>
+                        <a href="#" class="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                            View <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                    <h3 class="font-semibold text-white text-lg mb-2">SQL for Data Science</h3>
+                    <p class="text-text-secondary text-sm mb-2">University of California, Davis (Coursera)</p>
+                    <p class="text-text-secondary text-xs mb-4">Issued: September 2023</p>
+                    <p class="text-text-secondary text-sm leading-relaxed">
+                        Mastered SQL fundamentals for data science, including queries, joins, subqueries, and data analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies, Interests and Blog Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                Hobbies, Interests & <span class="gradient-text-purple">Blog</span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12 max-w-3xl mx-auto">
+                Sharing my thoughts, experiences, and insights from my journey as a data scientist. 
+                Read about challenges, learnings, AI engineering stuff, and the exciting world of technology.
+            </p>
+
+            <!-- Hobbies & Interests Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <!-- Hobby Card 1 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop" 
+                             alt="Photography" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Photography</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Capturing moments and exploring the world through the lens. Specialized in landscape and street photography.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hobby Card 2 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=800&h=600&fit=crop" 
+                             alt="Reading" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Reading</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Avid reader of tech books, science fiction, and data science publications. Always learning something new.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hobby Card 3 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop" 
+                             alt="Cooking" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Cooking</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Passionate about experimenting with different cuisines and flavors. Love trying new recipes from around the world.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hobby Card 4 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&h=600&fit=crop" 
+                             alt="Traveling" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Traveling</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Exploring new places, cultures, and experiences. Documenting my adventures and learning from different perspectives.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hobby Card 5 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&h=600&fit=crop" 
+                             alt="Gaming" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Gaming</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Enjoying strategy games, puzzle games, and exploring virtual worlds. Great way to relax and unwind.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hobby Card 6 -->
+                <div class="glass rounded-[20px] overflow-hidden card-hover group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop" 
+                             alt="Fitness" 
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-white font-semibold text-lg">Fitness</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-text-secondary text-sm leading-relaxed">
+                            Staying active through gym workouts, running, and outdoor activities. Balance between mind and body.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card -->
+            <div class="glass rounded-[20px] p-8 card-hover max-w-3xl mx-auto">
+                <div class="flex items-center gap-3 text-sm text-text-secondary mb-4">
+                    <span>Jan 15, 2024</span>
+                    <span>•</span>
+                    <span>5 min read</span>
+                </div>
+                <h3 class="text-2xl font-semibold mb-3">My Journey into Data Science</h3>
+                <p class="text-text-secondary mb-4">
+                    Exploring the path that led me to become a data scientist, the challenges I faced, 
+                    and the lessons I learned along the way. From first encounters with Python to deploying 
+                    production ML models, this is my story...
+                </p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 rounded-full glass text-xs">Data Science</span>
+                    <span class="px-3 py-1 rounded-full glass text-xs">Python</span>
+                    <span class="px-3 py-1 rounded-full glass text-xs">Career</span>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="px-6 py-2 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors">
+                        Read Full Article
+                    </a>
+                    <a href="#" class="px-6 py-2 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors">
+                        View All Posts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-bg-secondary">
+        <div class="container mx-auto max-w-7xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+                Get In <span class="gradient-text-purple">Touch</span>
+            </h2>
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+                Ready to bring your ideas to life? Let's discuss your next project.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Left Column - Contact Info -->
+                <div>
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-accent-purple/20 flex items-center justify-center">
+                                <i class="fas fa-envelope text-accent-purple"></i>
+                            </div>
+                            <div>
+                                <p class="text-text-secondary text-sm">Email</p>
+                                <p class="font-semibold">piettro@example.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-accent-teal/20 flex items-center justify-center">
+                                <i class="fas fa-phone text-accent-teal"></i>
+                            </div>
+                            <div>
+                                <p class="text-text-secondary text-sm">Phone</p>
+                                <p class="font-semibold">+55 (00) 00000-0000</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-accent-red/20 flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-accent-red"></i>
+                            </div>
+                            <div>
+                                <p class="text-text-secondary text-sm">Location</p>
+                                <p class="font-semibold">Brazil</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-semibold mb-4">Follow Me</h3>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-purple transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-teal transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-purple transition-colors">
+                                <i class="fab fa-medium text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-teal transition-colors">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Contact Form -->
+                <div>
+                    <form class="space-y-4">
+                        <div>
+                            <input type="text" placeholder="Your Name" 
+                                class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent focus:outline-none focus:border-accent-purple transition-colors">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" 
+                                class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent focus:outline-none focus:border-accent-purple transition-colors">
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Subject" 
+                                class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent focus:outline-none focus:border-accent-purple transition-colors">
+                        </div>
+                        <div>
+                            <textarea rows="5" placeholder="Your Message" 
+                                class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent focus:outline-none focus:border-accent-purple transition-colors resize-none"></textarea>
+                        </div>
+                        <div class="flex gap-4">
+                            <button type="submit" 
+                                class="flex-1 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors">
+                                Send Message
+                            </button>
+                            <button type="button" 
+                                class="px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors">
+                                Schedule a Call
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-4 sm:px-6 lg:px-8">
+        <div class="container mx-auto max-w-7xl">
+            <div class="flex flex-col items-center gap-8">
+                <!-- Name with Gradient -->
+                <div class="text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold">
+                        <span class="inline-block" style="background: linear-gradient(135deg, #14b8a6, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            Piettro
+                        </span>
+                        <span class="text-white ml-2">Rodrigues</span>
+                    </h2>
+                </div>
+
+                <!-- Social Icons Row -->
+                <div class="flex items-center justify-center gap-6 flex-wrap">
+                    <a href="https://linkedin.com/in/ksparth128" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://github.com/ksparth12" target="_blank" rel="noopener noreferrer" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fas fa-book text-xl"></i>
+                    </a>
+                    <a href="#" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fas fa-chart-bar text-xl"></i>
+                    </a>
+                    <a href="#" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fas fa-database text-xl"></i>
+                    </a>
+                    <a href="#" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fas fa-code text-xl"></i>
+                    </a>
+                    <a href="mailto:ksparth12@gmail.com" 
+                       class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation Links Row -->
+                <nav class="flex flex-wrap items-center justify-center gap-6 text-sm">
+                    <a href="#about" class="text-white hover:text-accent-purple transition-colors">About</a>
+                    <a href="#skills" class="text-white hover:text-accent-purple transition-colors">Skills</a>
+                    <a href="#projects" class="text-white hover:text-accent-purple transition-colors">Projects</a>
+                    <a href="#experience" class="text-white hover:text-accent-purple transition-colors">Experience</a>
+                    <a href="#" class="text-white hover:text-accent-purple transition-colors">Education</a>
+                    <a href="#" class="text-white hover:text-accent-purple transition-colors">Certifications</a>
+                    <a href="#contact" class="text-white hover:text-accent-purple transition-colors">Contact</a>
+                </nav>
+
+                <!-- Copyright and Title -->
+                <div class="text-center space-y-2 mt-4">
+                    <p class="text-white text-sm">© 2026 Piettro Rodrigues. All rights reserved.</p>
+                    <p class="text-text-secondary text-sm">Data Scientist | Full-Stack Developer | AI Engineer</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Project Data - Generated from Django
+        const projectsData = {
+            {% for project in projects %}
+            {{ project.id }}: {
+                title: "{{ project.get_title|escapejs }}",
+                type: "{{ project.project_type|capfirst }}",
+                images: [
+                    {% for img in project.images.all %}
+                    "{{ img.image_url|escapejs }}"{% if not forloop.last %},{% endif %}
+                    {% empty %}
+                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                    {% endfor %}
+                ],
+                description: "{{ project.get_description|escapejs }}",
+                techStack: [
+                    {% for tech in project.technologies.all %}
+                    { 
+                        name: "{{ tech.name|escapejs }}", 
+                        icon: '{{ tech.icon|escapejs }}',
+                        iconColor: "{{ tech.icon_color|escapejs }}"
+                    }{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                liveUrl: "{{ project.live_url|default:'#'|escapejs }}",
+                codeUrl: "{{ project.github_url|default:'#'|escapejs }}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        };
+
+        // Carousel state
+        let currentCarouselIndex = 0;
+        let currentProjectImages = [];
+
+        // Open Project Modal
+        function openProjectModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            const modal = document.getElementById('projectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalType = document.getElementById('modalType');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalTechStack = document.getElementById('modalTechStack');
+            const modalCarousel = document.getElementById('modalCarousel');
+            const carouselIndicators = document.getElementById('carouselIndicators');
+            const modalLiveBtn = document.getElementById('modalLiveBtn');
+            const modalCodeBtn = document.getElementById('modalCodeBtn');
+
+            // Reset carousel
+            currentCarouselIndex = 0;
+            currentProjectImages = project.images || [];
+
+            // Set project details
+            modalTitle.textContent = project.title;
+            modalType.textContent = project.type;
+            modalDescription.textContent = project.description;
+
+            // Create carousel images
+            modalCarousel.innerHTML = '';
+            carouselIndicators.innerHTML = '';
+
+            if (currentProjectImages.length > 0) {
+                currentProjectImages.forEach((image, index) => {
+                    // Create image element
+                    const imgDiv = document.createElement('div');
+                    imgDiv.className = 'carousel-image-container min-w-full h-full relative';
+                    imgDiv.innerHTML = `
+                        <img src="${image}" alt="${project.title} - Image ${index + 1}" 
+                             class="carousel-image w-full h-full object-cover">
+                    `;
+                    modalCarousel.appendChild(imgDiv);
+
+                    // Create indicator
+                    const indicator = document.createElement('div');
+                    indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
+                    indicator.onclick = () => goToCarouselImage(index);
+                    carouselIndicators.appendChild(indicator);
+                });
+
+                // Show/hide navigation buttons based on number of images
+                const prevBtn = document.getElementById('carouselPrev');
+                const nextBtn = document.getElementById('carouselNext');
+                if (currentProjectImages.length <= 1) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    carouselIndicators.style.display = 'none';
+                } else {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                    carouselIndicators.style.display = 'flex';
+                }
+            } else {
+                // If no images, show placeholder
+                modalCarousel.innerHTML = `
+                    <div class="min-w-full h-full flex items-center justify-center bg-white/5">
+                        <i class="fas fa-image text-6xl text-text-secondary"></i>
+                    </div>
+                `;
+                document.getElementById('carouselPrev').style.display = 'none';
+                document.getElementById('carouselNext').style.display = 'none';
+                carouselIndicators.style.display = 'none';
+            }
+
+            // Set basic info
+            modalTitle.textContent = project.title;
+            modalType.textContent = project.type;
+            modalDescription.textContent = project.description;
+
+            // Set tech stack
+            modalTechStack.innerHTML = '';
+            if (project.techStack && project.techStack.length > 0) {
+                project.techStack.forEach(tech => {
+                    const techItem = document.createElement('div');
+                    techItem.className = 'px-3 py-1.5 rounded-full glass border border-white/10 text-xs flex items-center gap-2';
+                    if (tech.icon) {
+                        techItem.innerHTML = `<i class="${tech.icon}"></i>`;
+                    }
+                    techItem.innerHTML += ` <span>${tech.name}</span>`;
+                    if (tech.iconColor && tech.iconColor.includes('#')) {
+                        techItem.querySelector('i').style.color = tech.iconColor;
+                    }
+                    modalTechStack.appendChild(techItem);
+                });
+            }
+
+            // Set button links
+            if (modalLiveBtn) {
+                if (project.liveUrl && project.liveUrl !== '#') {
+                    modalLiveBtn.style.display = 'flex';
+                    modalLiveBtn.onclick = () => window.open(project.liveUrl, '_blank');
+                } else {
+                    modalLiveBtn.style.display = 'none';
+                }
+            }
+            
+            if (modalCodeBtn) {
+                if (project.codeUrl && project.codeUrl !== '#') {
+                    modalCodeBtn.style.display = 'flex';
+                    modalCodeBtn.onclick = () => window.open(project.codeUrl, '_blank');
+                } else {
+                    modalCodeBtn.style.display = 'none';
+                }
+            }
+
+            // Initialize carousel
+            if (currentProjectImages.length > 0) {
+                updateCarousel();
+            }
+
+            // Show modal
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Project Modal
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            currentCarouselIndex = 0;
+        }
+
+        // Change Carousel Image
+        function changeCarouselImage(direction) {
+            if (currentProjectImages.length === 0) return;
+            
+            currentCarouselIndex += direction;
+            
+            if (currentCarouselIndex < 0) {
+                currentCarouselIndex = currentProjectImages.length - 1;
+            } else if (currentCarouselIndex >= currentProjectImages.length) {
+                currentCarouselIndex = 0;
+            }
+            
+            updateCarousel();
+        }
+
+        // Go to specific carousel image
+        function goToCarouselImage(index) {
+            if (index >= 0 && index < currentProjectImages.length) {
+                currentCarouselIndex = index;
+                updateCarousel();
+            }
+        }
+
+        // Update carousel display
+        function updateCarousel() {
+            const modalCarousel = document.getElementById('modalCarousel');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            // Move carousel
+            modalCarousel.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+            
+            // Update indicators
+            indicators.forEach((indicator, index) => {
+                if (index === currentCarouselIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+            }
+        });
+
+        // Toggle All Projects Visibility
+        let showingAllProjects = false;
+        
+        function toggleAllProjects() {
+            const projects = document.querySelectorAll('.project-card');
+            const viewAllBtn = document.getElementById('viewAllProjectsBtn');
+            const viewAllText = document.getElementById('viewAllText');
+            const viewAllIcon = document.getElementById('viewAllIcon');
+            
+            // Get active filter
+            const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+            
+            showingAllProjects = !showingAllProjects;
+            
+            // Show/hide projects after the first 6 that match the current filter
+            projects.forEach((project, index) => {
+                if (index >= 6) {
+                    const matchesFilter = activeFilter === 'all' || project.getAttribute('data-type') === activeFilter;
+                    
+                    if (showingAllProjects && matchesFilter) {
+                        project.classList.remove('hidden-by-default');
+                        project.style.display = '';
+                    } else if (!showingAllProjects) {
+                        project.classList.add('hidden-by-default');
+                        project.style.display = 'none';
+                    } else if (!matchesFilter) {
+                        project.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update button text and icon
+            if (showingAllProjects) {
+                viewAllText.textContent = 'Show Less';
+                viewAllIcon.classList.remove('fa-chevron-down');
+                viewAllIcon.classList.add('fa-chevron-up');
+            } else {
+                viewAllText.textContent = 'View All Projects';
+                viewAllIcon.classList.remove('fa-chevron-up');
+                viewAllIcon.classList.add('fa-chevron-down');
+            }
+            
+            // Smooth scroll to projects section when showing all
+            if (showingAllProjects) {
+                setTimeout(() => {
+                    document.getElementById('projects').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }, 100);
+            }
+        }
+
+        // Initialize: Hide projects beyond first 6 on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize projects visibility
+            const projects = document.querySelectorAll('.project-card');
+            const maxInitialProjects = 6;
+            
+            projects.forEach((project, index) => {
+                if (index >= maxInitialProjects) {
+                    project.classList.add('hidden-by-default');
+                    project.style.display = 'none';
+                }
+            });
+            
+            // Show/hide "View All" button based on total number of projects
+            const viewAllBtn = document.getElementById('viewAllProjectsBtn');
+            if (projects.length > maxInitialProjects) {
+                viewAllBtn.style.display = 'flex';
+            } else {
+                viewAllBtn.style.display = 'none';
+            }
+
+            // Initialize experiences visibility
+            const experiences = document.querySelectorAll('.experience-card');
+            const maxInitialExperiences = 3;
+            
+            experiences.forEach((exp, index) => {
+                if (index >= maxInitialExperiences) {
+                    exp.style.display = 'none';
+                }
+            });
+            
+            // Show/hide "View All Experiences" button based on total number of experiences
+            const viewAllExperiencesBtn = document.getElementById('viewAllExperiencesBtn');
+            if (experiences.length > maxInitialExperiences) {
+                viewAllExperiencesBtn.style.display = 'inline-block';
+            } else {
+                viewAllExperiencesBtn.style.display = 'none';
+            }
+        });
+
+        // Project Filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+                const projects = document.querySelectorAll('.project-card');
+                const maxInitialProjects = 6;
+
+                // Reset "View All" state when filter changes
+                showingAllProjects = false;
+                const viewAllText = document.getElementById('viewAllText');
+                const viewAllIcon = document.getElementById('viewAllIcon');
+                viewAllText.textContent = 'View All Projects';
+                viewAllIcon.classList.remove('fa-chevron-up');
+                viewAllIcon.classList.add('fa-chevron-down');
+
+                let visibleInFirstSix = 0;
+
+                projects.forEach((project, index) => {
+                    const matchesFilter = filter === 'all' || project.getAttribute('data-type') === filter;
+                    
+                    if (matchesFilter) {
+                        // Show first 6 matching projects
+                        if (visibleInFirstSix < maxInitialProjects) {
+                            project.style.display = 'block';
+                            project.classList.remove('hidden-by-default');
+                            visibleInFirstSix++;
+                        } else {
+                            // Hide projects beyond first 6
+                            project.style.display = 'none';
+                            project.classList.add('hidden-by-default');
+                        }
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+
+                // Update "View All" button visibility based on filtered results
+                const totalMatchingProjects = Array.from(projects).filter(p => 
+                    filter === 'all' || p.getAttribute('data-type') === filter
+                ).length;
+                
+                const viewAllBtn = document.getElementById('viewAllProjectsBtn');
+                if (totalMatchingProjects > maxInitialProjects) {
+                    viewAllBtn.style.display = 'flex';
+                } else {
+                    viewAllBtn.style.display = 'none';
+                }
+            });
+        });
+
+        // Experience visibility control
+        let showingAllExperiences = false;
+        
+        function toggleAllExperiences() {
+            const experiences = document.querySelectorAll('.experience-card');
+            const viewAllBtn = document.getElementById('viewAllExperiencesBtn');
+            
+            showingAllExperiences = !showingAllExperiences;
+            
+            experiences.forEach((exp, index) => {
+                if (index >= 3) {
+                    if (showingAllExperiences) {
+                        exp.style.display = '';
+                    } else {
+                        exp.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Update button text and scroll
+            if (showingAllExperiences) {
+                viewAllBtn.textContent = 'Show Less';
+                // Smooth scroll to experiences section when showing all
+                setTimeout(() => {
+                    document.getElementById('experience').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }, 100);
+            } else {
+                viewAllBtn.textContent = 'View All Experiences';
+            }
+        }
+
+        // Experience Toggle Details
+        document.querySelectorAll('.toggle-details').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const details = document.getElementById(id + '-details');
+                const isHidden = details.classList.contains('hidden');
+                const span = this.querySelector('span');
+                const icon = this.querySelector('i');
+
+                if (isHidden) {
+                    details.classList.remove('hidden');
+                    if (span) span.textContent = 'Show Less';
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    }
+                } else {
+                    details.classList.add('hidden');
+                    if (span) span.textContent = 'Show More';
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect - Add pill background when scrolling
+        const mainNav = document.getElementById('mainNav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                mainNav.classList.add('scrolled');
+            } else {
+                mainNav.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Language Selector
+        let currentLanguage = 'en';
+        const languageFlags = {
+            'en': '🇺🇸',
+            'es': '🇪🇸',
+            'pt': '🇧🇷'
+        };
+
+        // CV file paths by language
+        const cvPaths = {
+            'en': '/static/downloads/CV Piettro Rodrigues EN.pdf',
+            'es': '/static/downloads/CV Piettro Rodrigues ES.pdf',
+            'pt': '/static/downloads/CV Piettro Rodrigues PT.pdf'
+        };
+
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('languageMenu');
+            menu.classList.toggle('show');
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const menu = document.getElementById('languageMenu');
+            const currentFlag = document.getElementById('currentLanguageFlag');
+            const downloadBtn = document.getElementById('downloadCVBtn');
+            
+            // Update current flag
+            currentFlag.textContent = languageFlags[lang];
+            
+            // Update active option
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.textContent.includes(lang === 'en' ? 'English' : lang === 'es' ? 'Español' : 'Português')) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Update CV download link
+            if (downloadBtn && cvPaths[lang]) {
+                downloadBtn.href = cvPaths[lang];
+            }
+            
+            // Close menu
+            menu.classList.remove('show');
+            
+            // Here you would typically reload content or update text based on language
+            // For now, we'll just store the preference
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // You can add language switching logic here
+            console.log('Language changed to:', lang);
+        }
+
+        // Close language menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageDropdown = document.querySelector('.language-dropdown');
+            if (languageDropdown && !languageDropdown.contains(event.target)) {
+                document.getElementById('languageMenu').classList.remove('show');
+            }
+        });
+
+        // Theme Toggle
+        let isDarkMode = true; // Default to dark mode
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            
+            if (isDarkMode) {
+                body.classList.add('dark');
+                body.classList.remove('light');
+                themeToggle.classList.add('active');
+                icon.className = 'fas fa-moon control-icon';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light');
+                body.classList.remove('dark');
+                themeToggle.classList.remove('active');
+                icon.className = 'fas fa-sun control-icon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            
+            if (savedTheme === 'light') {
+                isDarkMode = false;
+                document.body.classList.add('light');
+                document.body.classList.remove('dark');
+                themeToggle.classList.remove('active');
+                icon.className = 'fas fa-sun control-icon';
+            } else {
+                // Ensure dark mode is active by default
+                document.body.classList.add('dark');
+                themeToggle.classList.add('active');
+                icon.className = 'fas fa-moon control-icon';
+            }
+            
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                document.getElementById('currentLanguageFlag').textContent = languageFlags[savedLanguage];
+                
+                // Update active language option
+                document.querySelectorAll('.language-option').forEach(option => {
+                    option.classList.remove('active');
+                    const optionText = option.textContent.trim();
+                    if ((savedLanguage === 'en' && optionText.includes('English')) ||
+                        (savedLanguage === 'es' && optionText.includes('Español')) ||
+                        (savedLanguage === 'pt' && optionText.includes('Português'))) {
+                        option.classList.add('active');
+                    }
+                });
+                
+                // Update CV download link
+                const downloadBtn = document.getElementById('downloadCVBtn');
+                if (downloadBtn && cvPaths[savedLanguage]) {
+                    downloadBtn.href = cvPaths[savedLanguage];
+                }
+            } else {
+                // Default to English CV
+                const downloadBtn = document.getElementById('downloadCVBtn');
+                if (downloadBtn && cvPaths['en']) {
+                    downloadBtn.href = cvPaths['en'];
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
