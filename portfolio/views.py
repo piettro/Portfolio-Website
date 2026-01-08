@@ -2,20 +2,16 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail, mail_admins
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from .models import (
     Project, Experience, SkillCategory, CoreCompetency,
     Certification, Hobby, BlogPost, ContactMessage
 )
 from .forms import ContactForm
-from django.views.i18n import set_language
 
-def index_2(request):
-    return render(request, 'portfolio/index_portfolio.html')
-
-from .models import (
-    Project, Experience, SkillCategory, CoreCompetency,
-    Certification, Hobby, BlogPost
-)
 
 def index(request):
     # Obter idioma atual da sessão (padrão: 'en')
@@ -25,7 +21,7 @@ def index(request):
     
     # Buscar dados dos models
     projects = Project.objects.all().prefetch_related('technologies', 'images')
-    experiences = Experience.objects.all().prefetch_related('achievements', 'technologies')
+    experiences = Experience.objects.all().prefetch_related('achievements', 'technologies').order_by('-start_period')
     skill_categories = SkillCategory.objects.all().prefetch_related('skills')
     core_competencies = CoreCompetency.objects.all()
     certifications = Certification.objects.all()
@@ -41,6 +37,8 @@ def index(request):
         project._lang = current_language
     for experience in experiences:
         experience._lang = current_language
+        for achievement in experience.achievements.all():
+            achievement._lang = current_language
     for category in skill_categories:
         category._lang = current_language
         for skill in category.skills.all():
@@ -69,27 +67,95 @@ def index(request):
             'name': 'Piettro Rodrigues',
             'email': 'piettroenrico@hotmail.com',
             'location': 'Madrid, Spain',
-            'github': 'https://github.com/ksparth12',
-            'linkedin': 'https://linkedin.com/in/ksparth128',
+            'github': 'https://github.com/piettro',
+            'linkedin': 'https://www.linkedin.com/in/piettro-rodrigues/',
             'title': 'Data Scientist & Quantitative Research',
+            'phone': '+34 687 708 201',
+            'blog_url': 'https://github.com/piettro'  # Adicione a URL do seu blog aqui
         }
     }
     
-    return render(request, 'portfolio/index_portfolio.html', context)
+    return render(request, 'portfolio/index.html', context)
 
 @require_http_methods(["POST"])
 def contact_submit(request):
     form = ContactForm(request.POST)
     if form.is_valid():
-        form.save()
-        messages.success(request, 'Thank you for your message! I will get back to you soon.')
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({'success': True, 'message': 'Message sent successfully!'})
-        return redirect('index')
+        contact_message = form.save()
+        
+        # Get current language for email templates
+        current_language = request.session.get('preferred_language', 'en')
+        
+        try:
+            # Email to user (confirmation)
+            user_subject = 'Thank you for contacting me!'
+            if current_language == 'es':
+                user_subject = '¡Gracias por contactarme!'
+            elif current_language == 'pt':
+                user_subject = 'Obrigado por entrar em contato!'
+            
+            user_message_html = render_to_string('portfolio/emails/user_confirmation.html', {
+                'name': contact_message.name,
+                'subject': contact_message.subject,
+                'language': current_language
+            })
+            user_message_text = strip_tags(user_message_html)
+            
+            send_mail(
+                subject=user_subject,
+                message=user_message_text,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[contact_message.email],
+                html_message=user_message_html,
+                fail_silently=False,
+            )
+            
+            # Email to admin (notification)
+            admin_subject = f'New Contact Message from {contact_message.name}'
+            admin_message_html = render_to_string('portfolio/emails/admin_notification.html', {
+                'contact_message': contact_message,
+            })
+            admin_message_text = strip_tags(admin_message_html)
+            
+            mail_admins(
+                subject=admin_subject,
+                message=admin_message_text,
+                html_message=admin_message_html,
+                fail_silently=False,
+            )
+            
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': True, 
+                    'message': 'Message sent successfully! I will get back to you soon.' if current_language == 'en' 
+                    else '¡Mensaje enviado con éxito! Te responderé pronto.' if current_language == 'es'
+                    else 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
+                })
+            messages.success(request, 'Thank you for your message! I will get back to you soon.')
+            return redirect('index')
+            
+        except Exception as e:
+            # Log the error but still save the message
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f'Error sending email: {str(e)}')
+            
+            # Still return success to user, but log the error
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return JsonResponse({
+                    'success': True, 
+                    'message': 'Message received! I will get back to you soon.'
+                })
+            messages.success(request, 'Message received! I will get back to you soon.')
+            return redirect('index')
     else:
-        messages.error(request, 'Please correct the errors in the form.')
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'errors': form.errors})
+            return JsonResponse({
+                'success': False, 
+                'errors': form.errors,
+                'message': 'Please correct the errors in the form.'
+            })
+        messages.error(request, 'Please correct the errors in the form.')
         return redirect('index')
 
 def download_resume(request):
@@ -105,14 +171,23 @@ def set_language_custom(request):
     View personalizada para troca de idioma
     """
     if request.method == 'POST':
-        language = request.POST.get('language', 'pt-br')
+        language = request.POST.get('language', 'pt')
+        
+        # Normalizar 'pt-br' para 'pt'
+        if language == 'pt-br':
+            language = 'pt'
         
         # Idiomas suportados
-        supported_languages = ['en', 'es', 'pt-br']
+        supported_languages = ['en', 'es', 'pt']
         
         if language in supported_languages:
-            # Salva o idioma na sessão
+            # Salva o idioma na sessão usando 'preferred_language'
+            request.session['preferred_language'] = language
             request.session['django_language'] = language
+            
+        # Retorna JSON para requisições AJAX
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'success': True, 'language': language})
             
         # Redireciona para a página anterior ou home
         next_url = request.POST.get('next', '/')

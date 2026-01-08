@@ -52,6 +52,8 @@ class ProjectAdmin(admin.ModelAdmin):
     fields = [
         'title', 'title_en', 'title_es',
         'description', 'description_en', 'description_es',
+        'challenges', 'challenges_en', 'challenges_es',
+        'solutions', 'solutions_en', 'solutions_es',
         'project_type',
         'logo_url', 'logo_text', 'logo_bg_gradient',
         'github_url', 'live_url',
@@ -104,6 +106,8 @@ class BlogPostAdmin(admin.ModelAdmin):
         'title', 'title_en', 'title_es',
         'slug',
         'excerpt', 'excerpt_en', 'excerpt_es',
+        'description', 'description_en', 'description_es',
+        'image_url', 'link',
         'content', 'content_en', 'content_es',
         'author', 'published_date', 'read_time',
         'tags', 'featured'

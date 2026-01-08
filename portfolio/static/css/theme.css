@@ -1,0 +1,328 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0b0218;
+  --text-primary: #ededed;
+  --text-secondary: #a3a3a3;
+  --accent-purple: #a855f7;
+  --accent-teal: #14b8a6;
+  --accent-red: #ef4444;
+}
+
+/* Light Theme Variables */
+body.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+}
+
+body.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .nav-fixed.scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .language-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .language-option {
+  color: var(--text-primary);
+}
+
+body.light .language-option:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light .language-option.active {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-purple);
+}
+
+body.light .control-button {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .control-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+body.light .control-button.active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--accent-purple);
+}
+
+/* Light theme scrollbar */
+body.light ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  background: var(--accent-purple);
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-teal);
+}
+
+/* Light theme card hover */
+body.light .card-hover:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.3);
+}
+
+/* Light theme timeline dot */
+body.light .timeline-dot {
+  border-color: var(--bg-primary);
+}
+
+/* Light theme for experience and certification cards */
+body.light .glass .text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .glass h3.text-white,
+body.light .glass h4.text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .glass span.text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .glass button.text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .glass .bg-white\/5 {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light .glass .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light .glass .hover\:border-white\/20:hover {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light .glass i.text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .glass span.text-white {
+  color: var(--text-primary) !important;
+}
+
+/* Hobby card text - always visible with strong shadow */
+.hobby-card-title {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.8) !important;
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.3);
+  color: #ffffff !important;
+}
+
+body.light .hobby-card-title {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.8) !important;
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.3);
+  color: #ffffff !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-teal);
+}
+
+/* Filter Button Active */
+.filter-btn.active {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+}
+
+/* Skill Bar Animation */
+@keyframes fillBar {
+  from {
+    width: 0;
+  }
+}
+
+.skill-bar-fill {
+  animation: fillBar 1.5s ease-out forwards;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Card Hover Effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.2);
+}
+
+/* Gradient Text */
+.gradient-text-purple {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-teal {
+  background: linear-gradient(135deg, var(--accent-teal), #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Timeline Line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-purple), var(--accent-teal));
+  transform: translateX(-50%);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  border: 3px solid var(--bg-primary);
+  z-index: 10;
+}
+
+/* Footer Styles */
+footer {
+  background: var(--bg-primary);
+}
+
+footer a {
+  text-decoration: none;
+}
+
+/* Light theme footer styles */
+body.light footer {
+  background: var(--bg-primary);
+}
+
+body.light footer .text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light footer a.text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light footer .bg-white\/5 {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light footer .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light footer .hover\:bg-white\/10:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light footer .hover\:border-white\/20:hover {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Override Tailwind classes to use CSS variables */
+.bg-bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+.bg-bg-secondary {
+  background-color: var(--bg-secondary) !important;
+}
+
+.text-text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Accent colors for Tailwind compatibility */
+.bg-accent-red\/20 {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.text-accent-red {
+  color: var(--accent-red) !important;
+}
+
+/* Light theme overrides */
+body.light .bg-bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+body.light .bg-bg-secondary {
+  background-color: var(--bg-secondary) !important;
+}
+
+body.light .text-text-primary {
+  color: var(--text-primary) !important;
+}
+
+body.light .text-text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+

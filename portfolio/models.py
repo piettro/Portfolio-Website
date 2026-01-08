@@ -37,6 +37,9 @@ class Experience(models.Model):
             return self.title_en
         elif language == 'es' and self.title_es:
             return self.title_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.title
         return self.title
     
     def get_description(self, language=None):
@@ -46,6 +49,9 @@ class Experience(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
     
     def get_achievements_list(self, language='en'):
@@ -81,11 +87,16 @@ class Achievement(models.Model):
     class Meta:
         ordering = ['order']
     
-    def get_text(self, language='en'):
+    def get_text(self, language=None):
+        if language is None:
+            language = getattr(self, '_lang', 'en')
         if language == 'en' and self.text_en:
             return self.text_en
         elif language == 'es' and self.text_es:
             return self.text_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.text
         return self.text
     
     def __str__(self):
@@ -123,6 +134,14 @@ class Project(models.Model):
     description_en = models.TextField(blank=True)
     description_es = models.TextField(blank=True)
     
+    challenges = models.TextField(blank=True, help_text="Problems and challenges faced in the project")
+    challenges_en = models.TextField(blank=True)
+    challenges_es = models.TextField(blank=True)
+    
+    solutions = models.TextField(blank=True, help_text="How the problems were solved")
+    solutions_en = models.TextField(blank=True)
+    solutions_es = models.TextField(blank=True)
+    
     project_type = models.CharField(max_length=50, choices=PROJECT_TYPE_CHOICES, default='web')
     logo_url = models.URLField(blank=True, help_text="URL for project logo/icon")
     logo_text = models.CharField(max_length=10, blank=True, help_text="Text to show if no logo URL")
@@ -146,6 +165,9 @@ class Project(models.Model):
             return self.title_en
         elif language == 'es' and self.title_es:
             return self.title_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.title
         return self.title
     
     def get_description(self, language=None):
@@ -155,7 +177,34 @@ class Project(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
+    
+    def get_challenges(self, language=None):
+        if language is None:
+            language = getattr(self, '_lang', 'en')
+        if language == 'en' and self.challenges_en:
+            return self.challenges_en
+        elif language == 'es' and self.challenges_es:
+            return self.challenges_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.challenges
+        return self.challenges
+    
+    def get_solutions(self, language=None):
+        if language is None:
+            language = getattr(self, '_lang', 'en')
+        if language == 'en' and self.solutions_en:
+            return self.solutions_en
+        elif language == 'es' and self.solutions_es:
+            return self.solutions_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.solutions
+        return self.solutions
     
     def get_technologies_list(self):
         return [tech for tech in self.technologies.all()]
@@ -219,6 +268,9 @@ class CoreCompetency(models.Model):
             return self.name_en
         elif language == 'es' and self.name_es:
             return self.name_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.name
         return self.name
     
     def get_description(self, language=None):
@@ -228,6 +280,9 @@ class CoreCompetency(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
     
     def __str__(self):
@@ -290,6 +345,9 @@ class Skill(models.Model):
             return self.name_en
         elif language == 'es' and self.name_es:
             return self.name_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.name
         return self.name
     
     def get_description(self, language=None):
@@ -299,6 +357,9 @@ class Skill(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
     
     def __str__(self):
@@ -334,6 +395,9 @@ class Certification(models.Model):
             return self.title_en
         elif language == 'es' and self.title_es:
             return self.title_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.title
         return self.title
     
     def get_description(self, language=None):
@@ -343,6 +407,9 @@ class Certification(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
     
     @property
@@ -377,6 +444,9 @@ class Hobby(models.Model):
             return self.name_en
         elif language == 'es' and self.name_es:
             return self.name_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.name
         return self.name
     
     def get_description(self, language=None):
@@ -386,6 +456,9 @@ class Hobby(models.Model):
             return self.description_en
         elif language == 'es' and self.description_es:
             return self.description_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.description
         return self.description
     
     def __str__(self):
@@ -404,6 +477,13 @@ class BlogPost(models.Model):
     excerpt = models.TextField(blank=True, help_text="Short summary for listing page")
     excerpt_en = models.TextField(blank=True)
     excerpt_es = models.TextField(blank=True)
+    
+    description = models.TextField(blank=True, help_text="Description for homepage card (uses excerpt if empty)")
+    description_en = models.TextField(blank=True)
+    description_es = models.TextField(blank=True)
+    
+    image_url = models.URLField(blank=True, help_text="URL for blog post featured image")
+    link = models.URLField(blank=True, help_text="Link to full article")
     
     author = models.CharField(max_length=100, default='Piettro Rodrigues')
     published_date = models.DateField()
@@ -427,13 +507,46 @@ class BlogPost(models.Model):
             return self.title_en
         elif language == 'es' and self.title_es:
             return self.title_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.title
         return self.title
     
-    def get_excerpt(self, language='en'):
+    def get_excerpt(self, language=None):
+        if language is None:
+            language = getattr(self, '_lang', 'en')
         if language == 'en' and self.excerpt_en:
             return self.excerpt_en
         elif language == 'es' and self.excerpt_es:
             return self.excerpt_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            return self.excerpt
+        return self.excerpt
+    
+    def get_description(self, language=None):
+        if language is None:
+            language = getattr(self, '_lang', 'en')
+        # If description is set, use it; otherwise use excerpt
+        if language == 'en':
+            if self.description_en:
+                return self.description_en
+            elif self.excerpt_en:
+                return self.excerpt_en
+        elif language == 'es':
+            if self.description_es:
+                return self.description_es
+            elif self.excerpt_es:
+                return self.excerpt_es
+        elif language == 'pt':
+            # Portuguese uses the default field
+            if self.description:
+                return self.description
+            elif self.excerpt:
+                return self.excerpt
+        # Fallback to default fields
+        if self.description:
+            return self.description
         return self.excerpt
     
     def get_tags_list(self):

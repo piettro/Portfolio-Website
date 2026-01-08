@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+        }
+        .info-box {
+            background: white;
+            border-left: 4px solid #a855f7;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #a855f7;
+            margin-right: 10px;
+        }
+        .message-box {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>New Contact Message Received</h1>
+    </div>
+    <div class="content">
+        <p>You have received a new message through your portfolio contact form.</p>
+        
+        <div class="info-box">
+            <p><span class="info-label">From:</span>{{ contact_message.name }}</p>
+            <p><span class="info-label">Email:</span>{{ contact_message.email }}</p>
+            <p><span class="info-label">Subject:</span>{{ contact_message.subject }}</p>
+            <p><span class="info-label">Date:</span>{{ contact_message.created_at|date:"F d, Y H:i" }}</p>
+        </div>
+        
+        <div class="message-box">
+            <h3>Message:</h3>
+            <p>{{ contact_message.message|linebreaks }}</p>
+        </div>
+        
+        <p><strong>Action Required:</strong> Please respond to this message as soon as possible.</p>
+        
+        <p>You can view all contact messages in the Django admin panel.</p>
+    </div>
+</body>
+</html>
+

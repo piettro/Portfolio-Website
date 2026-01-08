@@ -1,0 +1,189 @@
+/* Modal Styles */
+#projectModal {
+  display: none;
+}
+
+#projectModal.show {
+  display: flex !important;
+}
+
+.modal-overlay {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar for Modal */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--accent-purple);
+  border-radius: 4px;
+}
+
+/* Carousel Styles */
+#modalCarousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-image-container {
+  flex-shrink: 0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel-indicator.active {
+  background: var(--accent-purple);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.carousel-indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body.light .carousel-indicator {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+body.light .carousel-indicator:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Light theme modal styles */
+body.light .modal-content {
+  background-color: var(--bg-primary) !important;
+}
+
+body.light .modal-content .bg-bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+body.light .modal-content .bg-bg-primary\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+body.light .modal-content .text-white {
+  color: var(--text-primary) !important;
+}
+
+body.light .modal-content .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light .modal-content .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light .modal-content .border-t.border-white\/10 {
+  border-top-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light .modal-content .hover\:border-white\/20:hover {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light .modal-content .hover\:border-white\/40:hover {
+  border-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+body.light .modal-content .glass {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light .modal-content button.glass {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light .modal-content button.glass:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+body.light .modal-content i {
+  color: var(--text-primary) !important;
+}
+
+body.light .modal-content button i {
+  color: var(--text-primary) !important;
+}
+
+body.light .modal-content .modal-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Hide projects beyond first 6 by default */
+.project-card.hidden-by-default {
+  display: none;
+}
+
+.project-card.show-all {
+  display: block !important;
+}
+
+/* Message Modal Styles */
+#messageModal {
+  display: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#messageModal.show {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#messageModal.show > div {
+  transform: scale(1) !important;
+}
+
+#messageModal > div {
+  transition: transform 0.3s ease;
+}
+
+

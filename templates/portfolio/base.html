@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Piettro Rodrigues - Portfolio{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    {% block extra_css %}{% endblock %}
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': '#0a0a0a',
+                        'bg-secondary': '#0b0218',
+                        'text-primary': '#ededed',
+                        'text-secondary': '#a3a3a3',
+                        'accent-purple': '#a855f7',
+                        'accent-teal': '#14b8a6',
+                        'accent-red': '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bg-primary text-text-primary antialiased">
+    {% include 'portfolio/includes/header.html' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'portfolio/includes/footer.html' %}
+
+    {% block extra_js %}{% endblock %}
+    <script src="{% static 'js/portfolio.js' %}"></script>
+</body>
+</html>
+

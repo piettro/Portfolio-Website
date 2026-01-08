@@ -1,0 +1,66 @@
+<!-- Footer -->
+<footer class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-7xl">
+        <div class="flex flex-col items-center gap-8">
+            <!-- Name with Gradient -->
+            <div class="text-center">
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    <span class="inline-block" style="background: linear-gradient(135deg, #14b8a6, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        Piettro
+                    </span>
+                    <span class="text-text-primary ml-2">Rodrigues</span>
+                </h2>
+            </div>
+
+            <!-- Social Icons Row -->
+            <div class="flex items-center justify-center gap-6 flex-wrap">
+                <a href="{{ profile_info.linkedin|default:"#" }}" target="_blank" rel="noopener noreferrer" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="{{ profile_info.github|default:"#" }}" target="_blank" rel="noopener noreferrer" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fas fa-book text-xl"></i>
+                </a>
+                <a href="#" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fas fa-chart-bar text-xl"></i>
+                </a>
+                <a href="#" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fas fa-database text-xl"></i>
+                </a>
+                <a href="#" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fas fa-code text-xl"></i>
+                </a>
+                <a href="mailto:ksparth12@gmail.com" 
+                   class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-text-primary hover:bg-white/10 hover:border-white/20 transition-all">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+
+            <!-- Navigation Links Row -->
+            <nav class="flex flex-wrap items-center justify-center gap-6 text-sm">
+                <a href="#about" class="text-text-primary hover:text-accent-purple transition-colors">About</a>
+                <a href="#skills" class="text-text-primary hover:text-accent-purple transition-colors">Skills</a>
+                <a href="#projects" class="text-text-primary hover:text-accent-purple transition-colors">Projects</a>
+                <a href="#experience" class="text-text-primary hover:text-accent-purple transition-colors">Experience</a>
+                <a href="#" class="text-text-primary hover:text-accent-purple transition-colors">Education</a>
+                <a href="#" class="text-text-primary hover:text-accent-purple transition-colors">Certifications</a>
+                <a href="#contact" class="text-text-primary hover:text-accent-purple transition-colors">Contact</a>
+            </nav>
+
+            <!-- Copyright and Title -->
+            <div class="text-center space-y-2 mt-4">
+                <p class="text-text-primary text-sm">© 2026 Piettro Rodrigues. All rights reserved.</p>
+                <p class="text-text-secondary text-sm">Data Scientist | Full-Stack Developer | AI Engineer</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
