@@ -22,8 +22,8 @@
 
         <!-- Hero Content -->
         <div class="relative z-10 text-center max-w-4xl mx-auto">
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4">
-                Hi, I'm <span class="gradient-text-purple">{{ profile_info.name|default:"Piettro" }}</span>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4" data-i18n="greeting">
+                Hi, I'm Piettro Rodrigues
             </h1>
             <div class="text-2xl sm:text-3xl md:text-4xl font-light text-text-secondary min-h-[3rem] flex items-center justify-center">
                 <span class="typewriter inline-block">{{ profile_info.title|default:"Data Scientist & Quantitative Research" }}</span>
@@ -144,7 +144,7 @@
             </div>
 
             <div class="text-center mt-12 space-y-6">
-                <p class="text-text-secondary text-lg">
+                <p class="text-text-secondary text-lg" data-i18n="interested_working_together">
                     Interested in working together?
                 </p>
                 <a href="#contact" class="px-8 py-3 rounded-full text-white font-semibold transition-all hover:scale-105 inline-block" 
@@ -242,8 +242,8 @@
     <!-- Experience Timeline Section -->
     <section id="experience" class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">
-                Professional <span class="gradient-text-purple">Journey</span>
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center gradient-text-purple" data-i18n="professional_journey">
+                Professional Journey
             </h2>
 
             <div class="relative">
@@ -275,7 +275,7 @@
                                     </div>
                                 </div>
                                 <p class="text-text-secondary text-sm mb-4">
-                                    {{ experience.get_description|default:experience.description|truncatewords:30 }}
+                                    {{ experience.get_description|default:experience.description }}
                                 </p>
                                 <button class="{% if experience.icon_color %}text-{{ experience.icon_color }}{% else %}text-blue-400{% endif %} text-sm hover:underline flex items-center gap-2 toggle-details" data-id="exp{{ experience.id }}">
                                     <span data-i18n="show_more">Show More</span>
@@ -345,16 +345,16 @@
             <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
                 Skills <span class="gradient-text-purple">&amp; Tech Stack</span>
             </h2>
-            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto" data-i18n="skills_description">
                 Advanced expertise in Data Science, Machine Learning, and AI-driven solutions.
             </p>
 
             <!-- Core Competencies -->
             <div class="mb-16">
                 <h3 class="text-2xl md:text-3xl font-semibold text-center mb-2">
-                    <span data-i18n="core_competencies">Core Competencies</span>
+                    <span data-i18n="core_competencies" data-i18n="core_competencies">Core Competencies</span>
                 </h3>
-                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm">
+                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm" data-i18n="core_competencies_description">
                     Essential soft skills and core capabilities that drive my professional excellence.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -379,7 +379,7 @@
                 <h3 class="text-2xl md:text-3xl font-semibold text-center mb-2">
                     <span data-i18n="technical_expertise">Technical Expertise</span>
                 </h3>
-                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm">
+                <p class="text-center text-text-secondary mb-10 max-w-3xl mx-auto text-sm" data-i18n="technical_expertise_description">
                     Comprehensive technical skills across various domains with proficiency levels.
                 </p>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -436,7 +436,7 @@
                     About Me
                 </span>
             </h2>
-            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto" data-i18n="about_me_description">
                 Crafting data-driven solutions & intelligent systems.
             </p>
 
@@ -445,17 +445,17 @@
                 <div>
                     <h3 class="text-2xl font-semibold mb-4">Background</h3>
                     <div class="text-text-secondary space-y-4">
-                        <p>
+                        <p data-i18n="about_me_paragraphs_1">
                             I'm a passionate Data Scientist with over 5 years of experience in transforming raw data into actionable insights. 
                             My journey started with a fascination for patterns and predictions, which led me to specialize in machine learning, 
                             data engineering, and business intelligence.
                         </p>
-                        <p>
+                        <p data-i18n="about_me_paragraphs_2">
                             I've worked with various industries, from healthcare to finance, helping organizations leverage their data to make 
                             informed decisions. My expertise spans the entire data science lifecycle, from data collection and cleaning to model 
                             deployment and monitoring.
                         </p>
-                        <p>
+                        <p data-i18n="about_me_paragraphs_3">
                             Beyond technical skills, I'm passionate about continuous learning and staying updated with the latest trends in AI and 
                             data science. I enjoy sharing knowledge through blog posts, speaking at conferences, and mentoring aspiring data scientists.
                         </p>
@@ -468,32 +468,32 @@
                         <div class="w-12 h-12 rounded-lg bg-accent-purple/20 flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-chart-line text-accent-purple text-xl"></i>
                         </div>
-                        <h4 class="font-semibold mb-2">Data Analytics</h4>
-                        <p class="text-xs text-text-secondary">Statistical analysis and insights</p>
+                        <h4 class="font-semibold mb-2" data-i18n="data_analytics_about">Data Analytics</h4>
+                        <p class="text-xs text-text-secondary" data-i18n="data_analytics_about_description">Statistical analysis and insights</p>
                     </div>
 
                     <div class="glass rounded-[20px] p-6 card-hover text-center">
                         <div class="w-12 h-12 rounded-lg bg-accent-teal/20 flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-cogs text-accent-teal text-xl"></i>
                         </div>
-                        <h4 class="font-semibold mb-2">Problem Solver</h4>
-                        <p class="text-xs text-text-secondary">Creative solutions</p>
+                        <h4 class="font-semibold mb-2" data-i18n="problem_solver_about">Problem Solver</h4>
+                        <p class="text-xs text-text-secondary" data-i18n="problem_solver_about_description">Creative solutions</p>
                     </div>
 
                     <div class="glass rounded-[20px] p-6 card-hover text-center">
                         <div class="w-12 h-12 rounded-lg bg-accent-red/20 flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-users text-accent-red text-xl"></i>
                         </div>
-                        <h4 class="font-semibold mb-2">Team Player</h4>
-                        <p class="text-xs text-text-secondary">Collaborative mindset</p>
+                        <h4 class="font-semibold mb-2" data-i18n="team_player_about">Team Player</h4>
+                        <p class="text-xs text-text-secondary" data-i18n="team_player_about_description">Collaborative mindset</p>
                     </div>
 
                     <div class="glass rounded-[20px] p-6 card-hover text-center">
                         <div class="w-12 h-12 rounded-lg bg-accent-purple/20 flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-brain text-accent-purple text-xl"></i>
                         </div>
-                        <h4 class="font-semibold mb-2">AI Expert</h4>
-                        <p class="text-xs text-text-secondary">ML & Deep Learning</p>
+                        <h4 class="font-semibold mb-2" data-i18n="ai_expert_about">AI Expert</h4>
+                        <p class="text-xs text-text-secondary" data-i18n="ai_expert_about_description">ML & Deep Learning</p>
                     </div>
                 </div>
             </div>
@@ -511,12 +511,12 @@
     </section>
 
     <!-- Certifications Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="certifications" class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="container mx-auto max-w-7xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
                 <span class="gradient-text-purple" data-i18n="certifications">Certificates</span>
             </h2>
-            <p class="text-center text-text-secondary mb-12">
+            <p class="text-center text-text-secondary mb-12" data-i18n="certifications_description">
                 Professional certifications and courses I've completed
             </p>
 
@@ -571,10 +571,10 @@
     <!-- Hobbies, Interests and Blog Section -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="container mx-auto max-w-7xl">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 text-center" data-i18n="hobbies_interests_blog">
                 Hobbies, Interests <span class="gradient-text-purple">&amp; Blog</span>
             </h2>
-            <p class="text-center text-text-secondary mb-12 max-w-3xl mx-auto">
+            <p class="text-center text-text-secondary mb-12 max-w-3xl mx-auto" data-i18n="hobbies_interests_blog_description">
                 Sharing my thoughts, experiences, and insights from my journey as a data scientist. 
                 Read about challenges, learnings, AI engineering stuff, and the exciting world of technology.
             </p>
@@ -657,13 +657,13 @@
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-4">
                     {% if featured_blog_post.link %}
-                    <a href="{{ featured_blog_post.link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold">
+                    <a data-i18n="read_full_article" href="{{ featured_blog_post.link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold">
                         <i class="fas fa-external-link-alt text-sm"></i>
                         Read Full Article
                     </a>
                     {% endif %}
                     {% if profile_info.blog_url %}
-                    <a href="{{ profile_info.blog_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-colors font-semibold text-text-primary">
+                    <a data-i18n="view_all_posts" href="{{ profile_info.blog_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-colors font-semibold text-text-primary">
                         <i class="fas fa-book text-sm"></i>
                         View All Posts
                     </a>
@@ -672,7 +672,7 @@
             </div>
             {% else %}
             <div class="glass rounded-[20px] p-8 card-hover max-w-3xl mx-auto text-center">
-                <p class="text-text-secondary">No blog posts available at the moment.</p>
+                <p class="text-text-secondary" data-i18n="no_blog_posts">No blog posts available at the moment.</p>
             </div>
             {% endif %}
         </div>
@@ -686,7 +686,7 @@
                     Contact
                 </span>
             </h2>
-            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto">
+            <p class="text-center text-text-secondary mb-12 max-w-2xl mx-auto" data-i18n="contact_description">
                 Ready to bring your ideas to life? Let's discuss your next project.
             </p>
 
@@ -709,7 +709,7 @@
                                 <i class="fas fa-phone text-accent-teal"></i>
                             </div>
                             <div>
-                                <p class="text-text-secondary text-sm">Phone</p>
+                                <p data-i18n="phone" class="text-text-secondary text-sm">Phone</p>
                                 <p class="font-semibold">{{ profile_info.phone|default:"Phone" }}</p>
                             </div>
                         </div>
@@ -719,14 +719,14 @@
                                 <i class="fas fa-map-marker-alt text-accent-red"></i>
                             </div>
                             <div>
-                                <p class="text-text-secondary text-sm">Location</p>
+                                <p data-i18n="location" class="text-text-secondary text-sm">Location</p>
                                 <p class="font-semibold">{{ profile_info.location|default:"Location" }}</p>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <h3 class="font-semibold mb-4">Follow Me</h3>
+                        <h3 class="font-semibold mb-4" data-i18n="follow_me">Follow Me</h3>
                         <div class="flex gap-4">
                             <a href="{{ profile_info.github|default:"#" }}" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-purple transition-colors">
                                 <i class="fab fa-github text-xl"></i>
@@ -772,6 +772,7 @@
                                 </span>
                             </button>
                             <button type="button" 
+                                data-i18n="schedule_call"
                                 class="px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors text-text-primary" data-i18n="schedule_call">
                                 Schedule a Call
                             </button>
@@ -784,16 +785,78 @@
 
     <!-- Message Modal -->
     <div id="messageModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 invisible transition-all duration-300">
-        <div class="bg-bg-primary border border-white/10 rounded-[20px] p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300">
+        <div class="bg-bg-primary border border-white/10 rounded-[20px] p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-300 glass shadow-2xl">
             <div id="messageModalContent" class="text-center">
                 <h3 id="messageModalTitle" class="text-2xl font-bold mb-4 flex items-center justify-center"></h3>
-                <p id="messageModalMessage" class="text-text-secondary mb-6"></p>
-                <button id="messageModalClose" class="px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors">
+                <p id="messageModalMessage" class="text-text-secondary mb-6 leading-relaxed"></p>
+                <button id="messageModalClose" class="px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold min-w-[100px]">
                     OK
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- Additional Styles for Form -->
+    <style>
+        /* Loading animation for spinner */
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
+        }
+        
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Form submission states */
+        #contactForm {
+            transition: transform 0.2s ease;
+        }
+        
+        #submitBtn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        #submitBtnLoading {
+            display: none;
+        }
+        
+        #submitBtnLoading.show {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Modal animations */
+        #messageModal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #messageModal.show .transform {
+            transform: scale(1);
+        }
+        
+        /* Success/Error colors for modal */
+        .modal-success {
+            border-color: #10b981;
+        }
+        
+        .modal-error {
+            border-color: #ef4444;
+        }
+        
+        /* Pulse animation for loading */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
 
 {% endblock %}
 
@@ -871,8 +934,168 @@
                     cert.style.display = 'none';
                 });
             }
+
+            // Initialize Contact Form with AJAX
+            initContactForm();
         });
+
+        // Contact Form Handler
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitBtnText = document.getElementById('submitBtnText');
+            const submitBtnLoading = document.getElementById('submitBtnLoading');
+            
+            if (!contactForm) return;
+
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Validate form before submission
+                const name = document.getElementById('id_name').value.trim();
+                const email = document.getElementById('id_email').value.trim();
+                const subject = document.getElementById('id_subject').value.trim();
+                const message = document.getElementById('id_message').value.trim();
+                
+                if (!name || !email || !subject || !message) {
+                    showMessage('error', 'Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
+                
+                // Basic email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showMessage('error', 'Por favor, insira um endereço de email válido.');
+                    return;
+                }
+                
+                // Show loading state
+                showLoading();
+                
+                try {
+                    const formData = new FormData(contactForm);
+                    
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    });
+                    
+                    const data = await response.json();
+                    
+                    // Hide loading
+                    hideLoading();
+                    
+                    if (response.ok && data.success) {
+                        showMessage('success', data.message || 'Mensagem enviada com sucesso! Retornarei em breve.');
+                        contactForm.reset();
+                        
+                        // Add success animation to form
+                        contactForm.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            contactForm.style.transform = 'scale(1)';
+                        }, 200);
+                        
+                    } else {
+                        const errorMessage = data.message || 
+                            (data.errors ? 'Verifique os campos do formulário.' : 'Erro ao enviar mensagem. Tente novamente.');
+                        showMessage('error', errorMessage);
+                    }
+                    
+                } catch (error) {
+                    console.error('Erro no envio:', error);
+                    hideLoading();
+                    showMessage('error', 'Erro de conexão. Verifique sua internet e tente novamente.');
+                }
+            });
+
+            function showLoading() {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('pulse');
+                submitBtnText.style.display = 'none';
+                submitBtnLoading.classList.remove('hidden');
+                submitBtnLoading.classList.add('show');
+            }
+
+            function hideLoading() {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('pulse');
+                submitBtnText.style.display = 'inline';
+                submitBtnLoading.classList.add('hidden');
+                submitBtnLoading.classList.remove('show');
+            }
+
+            function showMessage(type, message) {
+                const modal = document.getElementById('messageModal');
+                const modalDiv = modal.querySelector('div');
+                const title = document.getElementById('messageModalTitle');
+                const messageText = document.getElementById('messageModalMessage');
+                const closeBtn = document.getElementById('messageModalClose');
+                
+                // Reset modal classes
+                modalDiv.classList.remove('modal-success', 'modal-error');
+                
+                // Configure modal content based on type
+                if (type === 'success') {
+                    title.innerHTML = '<i class="fas fa-check-circle text-green-500 mr-3"></i>Mensagem Enviada!';
+                    title.className = 'text-2xl font-bold mb-4 flex items-center justify-center text-green-500';
+                    closeBtn.className = 'px-8 py-3 rounded-full bg-green-500 text-white hover:bg-green-600 transition-colors font-semibold min-w-[120px]';
+                    modalDiv.classList.add('modal-success');
+                } else {
+                    title.innerHTML = '<i class="fas fa-exclamation-triangle text-red-500 mr-3"></i>Erro no Envio';
+                    title.className = 'text-2xl font-bold mb-4 flex items-center justify-center text-red-500';
+                    closeBtn.className = 'px-8 py-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors font-semibold min-w-[120px]';
+                    modalDiv.classList.add('modal-error');
+                }
+                
+                messageText.textContent = message;
+                
+                // Show modal with smooth animation
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0', 'invisible');
+                    modal.classList.add('opacity-100', 'visible');
+                    modal.querySelector('.transform').classList.remove('scale-95');
+                    modal.querySelector('.transform').classList.add('scale-100');
+                }, 10);
+                
+                // Close modal function
+                const closeModal = () => {
+                    modal.classList.add('opacity-0', 'invisible');
+                    modal.classList.remove('opacity-100', 'visible');
+                    modal.querySelector('.transform').classList.add('scale-95');
+                    modal.querySelector('.transform').classList.remove('scale-100');
+                    
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                    }, 300);
+                };
+                
+                // Event listeners for closing
+                closeBtn.onclick = closeModal;
+                modal.onclick = (e) => {
+                    if (e.target === modal) closeModal();
+                };
+                
+                // ESC key to close
+                const escKeyListener = (e) => {
+                    if (e.key === 'Escape') {
+                        closeModal();
+                        document.removeEventListener('keydown', escKeyListener);
+                    }
+                };
+                document.addEventListener('keydown', escKeyListener);
+                
+                // Auto close success messages after 4 seconds
+                if (type === 'success') {
+                    setTimeout(() => {
+                        closeModal();
+                        document.removeEventListener('keydown', escKeyListener);
+                    }, 4000);
+                }
+            }
+        }
     </script>
 {% endblock %}
-
-

@@ -11,7 +11,7 @@ from .models import (
     Certification, Hobby, BlogPost, ContactMessage
 )
 from .forms import ContactForm
-
+from services.email_service import send_email
 
 def index(request):
     # Obter idioma atual da sessão (padrão: 'en')
@@ -99,15 +99,11 @@ def contact_submit(request):
                 'subject': contact_message.subject,
                 'language': current_language
             })
-            user_message_text = strip_tags(user_message_html)
             
-            send_mail(
+            send_email(
                 subject=user_subject,
-                message=user_message_text,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[contact_message.email],
-                html_message=user_message_html,
-                fail_silently=False,
+                to=[contact_message.email],
+                html=user_message_html,
             )
             
             # Email to admin (notification)
@@ -115,13 +111,11 @@ def contact_submit(request):
             admin_message_html = render_to_string('portfolio/emails/admin_notification.html', {
                 'contact_message': contact_message,
             })
-            admin_message_text = strip_tags(admin_message_html)
             
-            mail_admins(
+            send_email(
                 subject=admin_subject,
-                message=admin_message_text,
-                html_message=admin_message_html,
-                fail_silently=False,
+                to="piettroenrico@hotmail.com",
+                html=admin_message_html,
             )
             
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -131,6 +125,7 @@ def contact_submit(request):
                     else '¡Mensaje enviado con éxito! Te responderé pronto.' if current_language == 'es'
                     else 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
                 })
+                
             messages.success(request, 'Thank you for your message! I will get back to you soon.')
             return redirect('index')
             

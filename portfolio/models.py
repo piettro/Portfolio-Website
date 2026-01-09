@@ -327,8 +327,7 @@ class Skill(models.Model):
     description_en = models.TextField(blank=True)
     description_es = models.TextField(blank=True)
     
-    icon = models.CharField(max_length=100, blank=True, help_text="Font Awesome icon class")
-    icon_color = models.CharField(max_length=50, blank=True, help_text="Icon color or class")
+    icon = models.URLField(blank=True, help_text="URL for logo image")
     
     order = models.IntegerField(default=0)
     

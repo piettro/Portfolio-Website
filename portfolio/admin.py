@@ -28,7 +28,7 @@ class ProjectImageInline(admin.TabularInline):
 
 class SkillInline(admin.TabularInline):
     model = Skill
-    fields = ['name', 'name_en', 'name_es', 'experience_years', 'percentage', 'icon', 'icon_color', 'order', 'description', 'description_en', 'description_es']
+    fields = ['name', 'name_en', 'name_es', 'experience_years', 'percentage', 'icon',  'order', 'description', 'description_en', 'description_es']
     extra = 1
 
 @admin.register(Experience)

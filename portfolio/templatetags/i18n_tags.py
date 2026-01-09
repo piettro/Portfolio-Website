@@ -6,7 +6,7 @@ register = template.Library()
 # Dicionário de traduções
 TRANSLATIONS = {
     'en': {
-        "Hi, I'm": "Hi, I'm",
+        "Hi, I'm ": "Hi, I'm",
         "Download Resume": "Download Resume",
         "Data Scientist & Full Stack Developer passionate about turning complex data into actionable insights and building exceptional web experiences.": "Data Scientist & Full Stack Developer passionate about turning complex data into actionable insights and building exceptional web experiences.",
         "View my work": "View my work",
@@ -44,7 +44,7 @@ TRANSLATIONS = {
         "Tell me about your project or just say hello!": "Tell me about your project or just say hello!"
     },
     'es': {
-        "Hi, I'm": "Hola, soy",
+        "Hi, I'm ": "Hola, soy",
         "Download Resume": "Descargar Currículum",
         "Data Scientist & Full Stack Developer passionate about turning complex data into actionable insights and building exceptional web experiences.": "Científico de Datos & Desarrollador Full Stack apasionado por convertir datos complejos en conocimientos útiles y crear experiencias web excepcionales.",
         "View my work": "Ver mi trabajo",
@@ -82,7 +82,7 @@ TRANSLATIONS = {
         "Tell me about your project or just say hello!": "¡Cuéntame sobre tu proyecto o simplemente saluda!"
     },
     'pt-br': {
-        "Hi, I'm": "Olá, eu sou",
+        "Hi, I'm ": "Olá, eu sou",
         "Download Resume": "Baixar Currículo",
         "Data Scientist & Full Stack Developer passionate about turning complex data into actionable insights and building exceptional web experiences.": "Cientista de Dados & Desenvolvedor Full Stack apaixonado por transformar dados complexos em insights acionáveis e criar experiências web excepcionais.",
         "View my work": "Ver meu trabalho",
