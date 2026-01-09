@@ -1,0 +1,66 @@
+.fa-spin {
+  animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Form submission states */
+#contactForm {
+  transition: transform 0.2s ease;
+}
+
+#submitBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#submitBtnLoading {
+  display: none;
+}
+
+#submitBtnLoading.show {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal animations */
+#messageModal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#messageModal.show .transform {
+  transform: scale(1);
+}
+
+/* Success/Error colors for modal */
+.modal-success {
+  border-color: #10b981;
+}
+
+.modal-error {
+  border-color: #ef4444;
+}
+
+/* Pulse animation for loading */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
