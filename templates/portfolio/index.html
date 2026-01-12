@@ -21,11 +21,11 @@
         </div>
 
         <!-- Hero Content -->
-        <div class="relative z-10 text-center max-w-4xl mx-auto">
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-4" data-i18n="greeting">
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight break-words" data-i18n="greeting">
                 Hi, I'm Piettro Rodrigues
             </h1>
-            <div class="text-2xl sm:text-3xl md:text-4xl font-light text-text-secondary min-h-[3rem] flex items-center justify-center">
+            <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-text-secondary min-h-[3rem] flex items-center justify-center">
                 <span class="typewriter inline-block">{{ profile_info.title|default:"Data Scientist & Quantitative Research" }}</span>
             </div>
         </div>
@@ -255,7 +255,7 @@
                 {% for experience in experiences %}
                 <div class="relative mb-16 experience-card" data-index="{{ forloop.counter0 }}" {% if forloop.counter > 3 %}style="display: none;"{% endif %}>
                     <div class="timeline-dot top-8"></div>
-                    <div class="{% if forloop.counter|divisibleby:2 %}ml-0 md:ml-[55%]{% else %}mr-0 md:mr-[55%]{% endif %} glass rounded-[20px] p-6 card-hover">
+                    <div class="ml-0 md:{% if forloop.counter|divisibleby:2 %}ml-[55%]{% else %}mr-[55%]{% endif %} glass rounded-[20px] p-6 card-hover">
                         <div class="flex items-start gap-4">
                             <div class="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                                 {% if experience.company_logo_image %}

@@ -244,6 +244,17 @@ html {
   z-index: 10;
 }
 
+/* Hide timeline line and dots on mobile */
+@media (max-width: 768px) {
+  .timeline-line {
+    display: none;
+  }
+  
+  .timeline-dot {
+    display: none;
+  }
+}
+
 /* Footer Styles */
 footer {
   background: var(--bg-secondary);

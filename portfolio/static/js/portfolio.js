@@ -1140,3 +1140,54 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
+
+// Mobile Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.className = 'fas fa-bars text-xl';
+                document.body.style.overflow = '';
+            } else {
+                icon.className = 'fas fa-times text-xl';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnButton = mobileMenuButton.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
