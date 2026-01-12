@@ -57,19 +57,24 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
-  background: rgba(10, 10, 10, 0.3);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 9999px;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  border: none;
   transition: all 0.3s ease;
   width: auto;
   max-width: 90%;
+  padding: 0;
 }
 
 @media (max-width: 768px) {
   .nav-fixed {
     top: 10px;
     max-width: 95%;
+    padding: 0;
+  }
+  
+  .nav-fixed.scrolled {
+    padding: 0.5rem 1rem;
   }
 }
 
@@ -78,27 +83,29 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
-  padding: 0;
+  padding: 0.5rem 1.5rem;
   top: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.nav-fixed.scrolled .nav-container {
-  padding: 0.5rem 1.5rem;
+/* Light theme navbar styles */
+body.light .nav-fixed.scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.light .nav-fixed a {
+  color: var(--text-primary);
+}
+
+body.light .nav-fixed a:hover {
+  color: var(--accent-purple);
 }
 
 .nav-container {
   transition: padding 0.3s ease;
   padding: 0;
-}
-
-@media (max-width: 768px) {
-  .nav-fixed .nav-container {
-    padding: 0.5rem 1rem;
-  }
-
-  .nav-fixed.scrolled .nav-container {
-    padding: 0.5rem 1rem;
-  }
 }
 
 /* Language Selector Dropdown */
@@ -120,14 +127,22 @@
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+body.light .language-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .language-menu.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .language-option {
@@ -143,6 +158,10 @@
 
 .language-option:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+body.light .language-option:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .language-option.active {
