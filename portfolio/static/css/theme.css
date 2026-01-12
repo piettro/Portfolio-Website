@@ -145,6 +145,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
+  justify-content: center;
 }
 
 /* Smooth Scroll */
