@@ -145,6 +145,7 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
+  justify-content: center;
 }
 
 /* Smooth Scroll */
@@ -242,6 +243,17 @@ html {
   background: var(--accent-purple);
   border: 3px solid var(--bg-primary);
   z-index: 10;
+}
+
+/* Hide timeline line and dots on mobile */
+@media (max-width: 768px) {
+  .timeline-line {
+    display: none;
+  }
+  
+  .timeline-dot {
+    display: none;
+  }
 }
 
 /* Footer Styles */
