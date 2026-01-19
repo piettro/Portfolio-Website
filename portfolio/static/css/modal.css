@@ -9,10 +9,13 @@
 
 .modal-overlay {
   animation: fadeIn 0.3s ease-out;
+  will-change: opacity;
 }
 
 .modal-content {
   animation: slideUp 0.3s ease-out;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 @keyframes fadeIn {
@@ -27,11 +30,11 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -70,9 +73,18 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.4); /* Improved contrast */
   transition: all 0.3s ease;
   cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0 2px;
+  outline: none;
+}
+
+.carousel-indicator:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
 }
 
 .carousel-indicator.active {
@@ -82,7 +94,7 @@
 }
 
 .carousel-indicator:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6); /* Improved contrast */
 }
 
 body.light .carousel-indicator {

@@ -295,9 +295,13 @@ function openProjectModal(projectId) {
             modalCarousel.appendChild(imgDiv);
 
             // Create indicator
-            const indicator = document.createElement('div');
+            const indicator = document.createElement('button');
             indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
             indicator.onclick = () => goToCarouselImage(index);
+            indicator.setAttribute('aria-label', `Go to image ${index + 1} of ${currentProjectImages.length}`);
+            indicator.setAttribute('type', 'button');
+            indicator.setAttribute('role', 'tab');
+            indicator.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
             carouselIndicators.appendChild(indicator);
         });
 
@@ -456,8 +460,10 @@ function updateCarousel() {
     indicators.forEach((indicator, index) => {
         if (index === currentCarouselIndex) {
             indicator.classList.add('active');
+            indicator.setAttribute('aria-selected', 'true');
         } else {
             indicator.classList.remove('active');
+            indicator.setAttribute('aria-selected', 'false');
         }
     });
 }
@@ -483,6 +489,11 @@ function toggleAllProjects() {
     const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
     
     showingAllProjects = !showingAllProjects;
+    
+    // Update aria-expanded for accessibility
+    if (viewAllBtn) {
+        viewAllBtn.setAttribute('aria-expanded', showingAllProjects);
+    }
     
     // Show/hide projects after the first 6 that match the current filter
     projects.forEach((project, index) => {
@@ -592,12 +603,20 @@ document.addEventListener('DOMContentLoaded', function() {
         isDarkMode = false;
         document.body.classList.add('light');
         document.body.classList.remove('dark');
-        if (themeToggle) themeToggle.classList.remove('active');
+        if (themeToggle) {
+            themeToggle.classList.remove('active');
+            themeToggle.setAttribute('aria-pressed', 'false');
+            themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+        }
         if (icon) icon.className = 'fas fa-sun control-icon';
     } else {
         // Ensure dark mode is active by default
         document.body.classList.add('dark');
-        if (themeToggle) themeToggle.classList.add('active');
+        if (themeToggle) {
+            themeToggle.classList.add('active');
+            themeToggle.setAttribute('aria-pressed', 'true');
+            themeToggle.setAttribute('aria-label', 'Toggle light mode');
+        }
         if (icon) icon.className = 'fas fa-moon control-icon';
     }
     
@@ -636,10 +655,14 @@ document.addEventListener('DOMContentLoaded', function() {
 // Project Filter
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
-        // Remove active class from all buttons
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
+        // Remove active class from all buttons and update aria-pressed
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+        });
+        // Add active class to clicked button and update aria-pressed
         this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
 
         const filter = this.getAttribute('data-filter');
         const projects = document.querySelectorAll('.project-card');
@@ -707,6 +730,11 @@ function toggleAllExperiences() {
     
     showingAllExperiences = !showingAllExperiences;
     
+    // Update aria-expanded for accessibility
+    if (viewAllBtn) {
+        viewAllBtn.setAttribute('aria-expanded', showingAllExperiences);
+    }
+    
     experiences.forEach((exp, index) => {
         if (index >= 3) {
             if (showingAllExperiences) {
@@ -747,6 +775,8 @@ document.querySelectorAll('.toggle-details').forEach(btn => {
 
         if (isHidden) {
             details.classList.remove('hidden');
+            // Update aria-expanded for accessibility
+            this.setAttribute('aria-expanded', 'true');
             if (span) {
                 const langTranslations = translations[currentLanguage] || translations['en'];
                 span.textContent = langTranslations['show_less'] || 'Show Less';
@@ -757,6 +787,8 @@ document.querySelectorAll('.toggle-details').forEach(btn => {
             }
         } else {
             details.classList.add('hidden');
+            // Update aria-expanded for accessibility
+            this.setAttribute('aria-expanded', 'false');
             if (span) {
                 const langTranslations = translations[currentLanguage] || translations['en'];
                 span.textContent = langTranslations['show_more'] || 'Show More';
@@ -789,8 +821,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Navbar Scroll Effect - Add pill background when scrolling
 const mainNav = document.getElementById('mainNav');
 let lastScroll = 0;
+let ticking = false;
 
-window.addEventListener('scroll', function() {
+// Throttle scroll handler for better performance
+function handleScroll() {
     if (!mainNav) return;
     const currentScroll = window.pageYOffset;
     
@@ -801,7 +835,15 @@ window.addEventListener('scroll', function() {
     }
     
     lastScroll = currentScroll;
-});
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+    }
+}, { passive: true });
 
 // Language Selector
 let currentLanguage = 'en';
@@ -823,8 +865,10 @@ function toggleLanguageMenu(event) {
         event.stopPropagation();
     }
     const menu = document.getElementById('languageMenu');
-    if (menu) {
-        menu.classList.toggle('show');
+    const button = document.getElementById('languageBtn');
+    if (menu && button) {
+        const isShowing = menu.classList.toggle('show');
+        button.setAttribute('aria-expanded', isShowing);
     }
 }
 
@@ -933,13 +977,21 @@ function toggleTheme() {
     if (isDarkMode) {
         body.classList.add('dark');
         body.classList.remove('light');
-        if (themeToggle) themeToggle.classList.add('active');
+        if (themeToggle) {
+            themeToggle.classList.add('active');
+            themeToggle.setAttribute('aria-pressed', 'true');
+            themeToggle.setAttribute('aria-label', 'Toggle light mode');
+        }
         if (icon) icon.className = 'fas fa-moon control-icon';
         localStorage.setItem('theme', 'dark');
     } else {
         body.classList.add('light');
         body.classList.remove('dark');
-        if (themeToggle) themeToggle.classList.remove('active');
+        if (themeToggle) {
+            themeToggle.classList.remove('active');
+            themeToggle.setAttribute('aria-pressed', 'false');
+            themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+        }
         if (icon) icon.className = 'fas fa-sun control-icon';
         localStorage.setItem('theme', 'light');
     }
@@ -1148,14 +1200,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', function() {
+            const isHidden = mobileMenu.classList.contains('hidden');
             mobileMenu.classList.toggle('hidden');
             const icon = mobileMenuButton.querySelector('i');
             
+            // Update aria attributes for accessibility
+            mobileMenuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+            mobileMenuButton.setAttribute('aria-label', isHidden ? 'Close navigation menu' : 'Open navigation menu');
+            
             if (mobileMenu.classList.contains('hidden')) {
-                icon.className = 'fas fa-bars text-xl';
+                icon.className = 'fas fa-bars text-xl text-black dark:text-white';
                 document.body.style.overflow = '';
             } else {
-                icon.className = 'fas fa-times text-xl';
+                icon.className = 'fas fa-times text-xl text-black dark:text-white';
                 document.body.style.overflow = 'hidden';
             }
         });
@@ -1166,6 +1223,8 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuOverlay.addEventListener('click', function(e) {
                 if (e.target === mobileMenuOverlay) {
                     mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
                     const icon = mobileMenuButton.querySelector('i');
                     icon.className = 'fas fa-bars text-xl text-black dark:text-white';
                     document.body.style.overflow = '';

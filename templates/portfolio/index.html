@@ -50,20 +50,20 @@
             </p>
             
             <!-- Filter Buttons -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="filter-btn active px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="all" data-i18n="all">
+            <div class="flex flex-wrap justify-center gap-4 mb-12" role="group" aria-label="Filter projects by category">
+                <button class="filter-btn active px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="all" data-i18n="all" aria-label="Show all projects" aria-pressed="true">
                     All
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="data-science" data-i18n="data_science">
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="data-science" data-i18n="data_science" aria-label="Filter projects by Data Science" aria-pressed="false">
                     Data Science
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="web" data-i18n="web_development">
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="web" data-i18n="web_development" aria-label="Filter projects by Web Development" aria-pressed="false">
                     Web Development
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="ai" data-i18n="ai_ml">
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="ai" data-i18n="ai_ml" aria-label="Filter projects by AI/ML" aria-pressed="false">
                     AI/ML
                 </button>
-                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="ai" data-i18n="quant">
+                <button class="filter-btn px-6 py-2 rounded-full glass border border-white/10 transition-all" data-filter="quant" data-i18n="quant" aria-label="Filter projects by Quantitative" aria-pressed="false">
                     Quant
                 </button>
             </div>
@@ -74,12 +74,16 @@
                 <div class="glass rounded-[20px] p-6 card-hover project-card cursor-pointer {% if forloop.counter > 6 %}hidden-by-default{% endif %}" 
                      data-type="{{ project.project_type }}" 
                      data-project="{{ project.id }}"
-                     onclick="openProjectModal({{ project.id }})">
+                     onclick="openProjectModal({{ project.id }})"
+                     role="button"
+                     tabindex="0"
+                     aria-label="View details of {{ project.get_title|default:project.title }} project"
+                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal({{ project.id }});}">
                     <!-- Project Icon/Logo -->
                     <div class="mb-4">
                         {% if project.logo_url %}
                         <div class="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
-                            <img src="{{ project.logo_url }}" alt="{{ project.get_title }}" class="w-full h-full object-cover">
+                            <img src="{{ project.logo_url }}" alt="{{ project.get_title }}" class="w-full h-full object-cover" loading="lazy" decoding="async">
                         </div>
                         {% elif project.logo_bg_gradient %}
                         <div class="w-14 h-14 rounded-lg bg-gradient-to-br {{ project.logo_bg_gradient }} flex items-center justify-center">
@@ -119,15 +123,17 @@
                     <div class="flex gap-3">
                         {% if project.live_url %}
                         <button class="flex-1 px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2" 
-                                onclick="event.stopPropagation(); window.open('{{ project.live_url }}', '_blank');">
-                            <i class="fas fa-external-link-alt"></i>
+                                onclick="event.stopPropagation(); window.open('{{ project.live_url }}', '_blank');"
+                                aria-label="View live demo of {{ project.get_title|default:project.title }}">
+                            <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                             <span data-i18n="live_demo">Live Demo</span>
                         </button>
                         {% endif %}
                         {% if project.github_url %}
                         <button class="px-4 py-2 rounded-lg glass border border-white/10 hover:border-white/20 text-text-primary text-sm font-semibold transition-colors flex items-center justify-center gap-2" 
-                                onclick="event.stopPropagation(); window.open('{{ project.github_url }}', '_blank');">
-                            <i class="fab fa-github"></i>
+                                onclick="event.stopPropagation(); window.open('{{ project.github_url }}', '_blank');"
+                                aria-label="View source code of {{ project.get_title|default:project.title }} on GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
                             <span data-i18n="code">Code</span>
                         </button>
                         {% endif %}
@@ -145,9 +151,11 @@
                 <button id="viewAllProjectsBtn" 
                         onclick="toggleAllProjects()"
                         class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple text-white font-semibold transition-all hover:scale-105 flex items-center gap-2 mx-auto"
-                        style="display: none;">
+                        style="display: none;"
+                        aria-label="Show or hide all projects"
+                        aria-expanded="false">
                     <span id="viewAllText" data-i18n="view_all_projects">View All Projects</span>
-                    <i id="viewAllIcon" class="fas fa-chevron-down transition-transform"></i>
+                    <i id="viewAllIcon" class="fas fa-chevron-down transition-transform" aria-hidden="true"></i>
                 </button>
             </div>
 
@@ -156,7 +164,9 @@
                     Interested in working together?
                 </p>
                 <a href="#contact" class="px-8 py-3 rounded-full text-white font-semibold transition-all hover:scale-105 inline-block" 
-                        style="background: linear-gradient(135deg, #a855f7, #3b82f6);" data-i18n="get_in_touch">
+                        style="background: linear-gradient(135deg, #a855f7, #3b82f6);" 
+                        data-i18n="get_in_touch"
+                        aria-label="Get in touch - Go to contact section">
                     Get In Touch
                 </a>
             </div>
@@ -170,12 +180,15 @@
              onclick="event.stopPropagation()">
             <!-- Modal Header -->
             <div class="sticky top-0 bg-bg-primary/95 backdrop-blur-sm border-b border-white/10 rounded-t-[20px] z-10">
-                <!-- Close Button -->
-                <div class="absolute top-4 right-4 z-20">
-                    <button onclick="closeProjectModal()" class="w-10 h-10 rounded-full glass border border-white/10 hover:border-accent-red hover:bg-accent-red/10 flex items-center justify-center transition-colors">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
+                    <!-- Close Button -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <button onclick="closeProjectModal()" 
+                                class="w-10 h-10 rounded-full glass border border-white/10 hover:border-accent-red hover:bg-accent-red/10 flex items-center justify-center transition-colors"
+                                aria-label="Close project modal">
+                            <i class="fas fa-times text-xl" aria-hidden="true"></i>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </div>
 
                 <!-- Image Carousel -->
                 <div class="relative w-full h-64 md:h-80 overflow-hidden rounded-t-[20px]">
@@ -184,11 +197,17 @@
                     </div>
                     
                     <!-- Carousel Navigation -->
-                    <button id="carouselPrev" onclick="changeCarouselImage(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm">
-                        <i class="fas fa-chevron-left"></i>
+                    <button id="carouselPrev" onclick="changeCarouselImage(-1)" 
+                            class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm"
+                            aria-label="Previous image">
+                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous image</span>
                     </button>
-                    <button id="carouselNext" onclick="changeCarouselImage(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm">
-                        <i class="fas fa-chevron-right"></i>
+                    <button id="carouselNext" onclick="changeCarouselImage(1)" 
+                            class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass border border-white/20 hover:border-white/40 flex items-center justify-center transition-colors backdrop-blur-sm"
+                            aria-label="Next image">
+                        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next image</span>
                     </button>
 
                     <!-- Carousel Indicators -->
@@ -232,17 +251,17 @@
                     </div>
                 </div>
 
-                <!-- Links -->
-                <div class="flex gap-4 pt-4 border-t border-white/10">
-                    <button id="modalLiveBtn" class="flex-1 px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-colors flex items-center justify-center gap-2">
-                        <i class="fas fa-external-link-alt"></i>
-                        View Live Demo
-                    </button>
-                    <button id="modalCodeBtn" class="flex-1 px-6 py-3 rounded-lg glass border border-white/10 hover:border-white/20 text-text-primary font-semibold transition-colors flex items-center justify-center gap-2">
-                        <i class="fab fa-github"></i>
-                        View Code on GitHub
-                    </button>
-                </div>
+                    <!-- Links -->
+                    <div class="flex gap-4 pt-4 border-t border-white/10">
+                        <button id="modalLiveBtn" class="flex-1 px-6 py-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-semibold transition-colors flex items-center justify-center gap-2" aria-label="View live demo of this project">
+                            <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                            View Live Demo
+                        </button>
+                        <button id="modalCodeBtn" class="flex-1 px-6 py-3 rounded-lg glass border border-white/10 hover:border-white/20 text-text-primary font-semibold transition-colors flex items-center justify-center gap-2" aria-label="View source code of this project on GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            View Code on GitHub
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -264,7 +283,7 @@
                         <div class="flex items-start gap-4">
                             <div class="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
                                 {% if experience.company_logo_image %}
-                                <img src="{{ experience.company_logo_image }}" alt="{{ experience.company }}" class="w-full h-full object-contain">
+                                <img src="{{ experience.company_logo_image }}" alt="{{ experience.company }}" class="w-full h-full object-contain" loading="lazy" decoding="async">
                                 {% else %}
                                 <i class="{{ experience.icon }} text-white text-xl"></i>
                                 {% endif %}
@@ -285,9 +304,13 @@
                                 <p class="text-text-secondary text-sm mb-4">
                                     {{ experience.get_description|default:experience.description }}
                                 </p>
-                                <button class="{% if experience.icon_color %}text-{{ experience.icon_color }}{% else %}text-blue-400{% endif %} text-sm hover:underline flex items-center gap-2 toggle-details" data-id="exp{{ experience.id }}">
+                                <button class="{% if experience.icon_color %}text-{{ experience.icon_color }}{% else %}text-blue-400{% endif %} text-sm hover:underline flex items-center gap-2 toggle-details" 
+                                        data-id="exp{{ experience.id }}"
+                                        aria-label="Show more details about {{ experience.get_title|default:experience.title }} at {{ experience.company }}"
+                                        aria-expanded="false"
+                                        aria-controls="exp{{ experience.id }}-details">
                                     <span data-i18n="show_more">Show More</span>
-                                    <i class="fas fa-chevron-down text-xs"></i>
+                                    <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
                                 </button>
                                 <div id="exp{{ experience.id }}-details" class="hidden mt-6 space-y-6">
                                     <!-- Key Achievements Section -->
@@ -339,7 +362,9 @@
             <div class="text-center mt-12">
                 <button id="viewAllExperiencesBtn" onclick="toggleAllExperiences()" 
                         class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple text-text-primary transition-all"
-                        style="display: none;">
+                        style="display: none;"
+                        aria-label="Show or hide all experiences"
+                        aria-expanded="false">
                     <span data-i18n="view_all_experiences">View All Experiences</span>
                 </button>
             </div>
@@ -508,10 +533,18 @@
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-                <button class="px-8 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors">
-                    <i class="fas fa-download mr-2"></i><span data-i18n="download_cv">Download CV</span>
-                </button>
-                <a href="#contact" class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors inline-block text-center" data-i18n="contact_me">
+                <a href="{% static 'downloads/CV Piettro Rodrigues EN.pdf' %}" 
+                   id="downloadCVBtnAbout"
+                   download
+                   aria-label="Download my CV from About section"
+                   class="px-8 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-2" aria-hidden="true"></i>
+                    <span data-i18n="download_cv">Download CV</span>
+                </a>
+                <a href="#contact" 
+                   class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors inline-block text-center" 
+                   data-i18n="contact_me"
+                   aria-label="Contact me - Go to contact section">
                     Contact Me
                 </a>
             </div>
@@ -595,7 +628,10 @@
                         {% if hobby.image_url %}
                         <img src="{{ hobby.image_url }}" 
                              alt="{{ hobby.get_name }}" 
-                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                             loading="lazy" 
+                             decoding="async"
+                             fetchpriority="low">
                         {% else %}
                         <div class="w-full h-full bg-gradient-to-br from-accent-purple/20 to-accent-teal/20 flex items-center justify-center">
                             <i class="fas fa-heart text-4xl text-white/40"></i>
@@ -665,14 +701,24 @@
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-4">
                     {% if featured_blog_post.link %}
-                    <a data-i18n="read_full_article" href="{{ featured_blog_post.link }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold">
-                        <i class="fas fa-external-link-alt text-sm"></i>
+                    <a data-i18n="read_full_article" 
+                       href="{{ featured_blog_post.link }}" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold"
+                       aria-label="Read full article: {{ featured_blog_post.get_title|default:featured_blog_post.title }}">
+                        <i class="fas fa-external-link-alt text-sm" aria-hidden="true"></i>
                         Read Full Article
                     </a>
                     {% endif %}
                     {% if profile_info.blog_url %}
-                    <a data-i18n="view_all_posts" href="{{ profile_info.blog_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-colors font-semibold text-text-primary">
-                        <i class="fas fa-book text-sm"></i>
+                    <a data-i18n="view_all_posts" 
+                       href="{{ profile_info.blog_url }}" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-colors font-semibold text-text-primary"
+                       aria-label="View all blog posts">
+                        <i class="fas fa-book text-sm" aria-hidden="true"></i>
                         View All Posts
                     </a>
                     {% endif %}
@@ -733,17 +779,27 @@
                         </div>
                     </div>
 
-                    <div>
-                        <h3 class="font-semibold mb-4" data-i18n="follow_me">Follow Me</h3>
-                        <div class="flex gap-4">
-                            <a href="{{ profile_info.github|default:"#" }}" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-purple transition-colors">
-                                <i class="fab fa-github text-xl"></i>
-                            </a>
-                            <a href="{{ profile_info.linkedin|default:"#" }}" class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-teal transition-colors">
-                                <i class="fab fa-linkedin text-xl"></i>
-                            </a>
+                        <div>
+                            <h3 class="font-semibold mb-4" data-i18n="follow_me">Follow Me</h3>
+                            <div class="flex gap-4">
+                                <a href="{{ profile_info.github|default:"#" }}" 
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Visit my GitHub profile"
+                                   class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-purple transition-colors">
+                                    <i class="fab fa-github text-xl" aria-hidden="true"></i>
+                                    <span class="sr-only">GitHub</span>
+                                </a>
+                                <a href="{{ profile_info.linkedin|default:"#" }}" 
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Visit my LinkedIn profile"
+                                   class="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center hover:border-accent-teal transition-colors">
+                                    <i class="fab fa-linkedin text-xl" aria-hidden="true"></i>
+                                    <span class="sr-only">LinkedIn</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                 </div>
 
                 <!-- Right Column - Contact Form -->
@@ -751,37 +807,52 @@
                     <form id="contactForm" class="space-y-4" method="post" action="{% url 'contact_submit' %}">
                         {% csrf_token %}
                         <div>
+                            <label for="id_name" class="sr-only">Your Name</label>
                             <input type="text" name="name" id="id_name" placeholder="Your Name" 
                                 data-i18n-placeholder="your_name" required
+                                aria-label="Your name"
+                                aria-required="true"
                                 class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent-purple transition-colors">
                         </div>
                         <div>
+                            <label for="id_email" class="sr-only">Your Email</label>
                             <input type="email" name="email" id="id_email" placeholder="Your Email" 
                                 data-i18n-placeholder="your_email" required
+                                aria-label="Your email address"
+                                aria-required="true"
                                 class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent-purple transition-colors">
                         </div>
                         <div>
+                            <label for="id_subject" class="sr-only">Subject</label>
                             <input type="text" name="subject" id="id_subject" placeholder="Subject" 
                                 data-i18n-placeholder="subject" required
+                                aria-label="Message subject"
+                                aria-required="true"
                                 class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent-purple transition-colors">
                         </div>
                         <div>
+                            <label for="id_message" class="sr-only">Your Message</label>
                             <textarea rows="5" name="message" id="id_message" placeholder="Your Message" 
                                 data-i18n-placeholder="message" required
+                                aria-label="Your message"
+                                aria-required="true"
                                 class="w-full px-4 py-3 rounded-lg glass border border-white/10 bg-transparent text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent-purple transition-colors resize-none"></textarea>
                         </div>
                         <div class="flex gap-4">
                             <button type="submit" id="submitBtn"
-                                class="flex-1 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" data-i18n="send_message">
+                                class="flex-1 px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
+                                data-i18n="send_message"
+                                aria-label="Submit contact form">
                                 <span id="submitBtnText">Send Message</span>
-                                <span id="submitBtnLoading" class="hidden">
-                                    <i class="fas fa-spinner fa-spin mr-2"></i>
+                                <span id="submitBtnLoading" class="hidden" aria-live="polite" aria-atomic="true">
+                                    <i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i>
                                     <span data-i18n="sending">Sending...</span>
                                 </span>
                             </button>
                             <button type="button" 
                                 data-i18n="schedule_call"
-                                class="px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors text-text-primary" data-i18n="schedule_call">
+                                class="px-6 py-3 rounded-full glass border border-white/10 hover:border-accent-purple transition-colors text-text-primary" 
+                                aria-label="Schedule a call (not yet implemented)">
                                 Schedule a Call
                             </button>
                         </div>
@@ -797,7 +868,7 @@
             <div id="messageModalContent" class="text-center">
                 <h3 id="messageModalTitle" class="text-2xl font-bold mb-4 flex items-center justify-center"></h3>
                 <p id="messageModalMessage" class="text-text-secondary mb-6 leading-relaxed"></p>
-                <button id="messageModalClose" class="px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold min-w-[100px]">
+                <button id="messageModalClose" class="px-6 py-3 rounded-full bg-accent-purple text-white hover:bg-purple-600 transition-colors font-semibold min-w-[100px]" aria-label="Close message modal">
                     OK
                 </button>
             </div>
