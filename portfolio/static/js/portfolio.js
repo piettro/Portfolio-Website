@@ -1160,11 +1160,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Close mobile menu when clicking outside (on overlay)
+        const mobileMenuOverlay = mobileMenu.querySelector('.mobile-menu-overlay');
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener('click', function(e) {
+                if (e.target === mobileMenuOverlay) {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('i');
+                    icon.className = 'fas fa-bars text-xl text-black dark:text-white';
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
         // Close mobile menu when clicking a link
         document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
             link.addEventListener('click', function() {
                 mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl text-black dark:text-white';
                 document.body.style.overflow = '';
             });
         });

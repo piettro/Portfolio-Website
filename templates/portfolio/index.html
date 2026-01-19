@@ -1,5 +1,6 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
+{% load i18n_tags %}
 
 {% block content %}
     <!-- Hero Section -->
@@ -25,8 +26,12 @@
             <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight break-words" data-i18n="greeting">
                 Hi, I'm Piettro Rodrigues
             </h1>
-            <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-text-secondary min-h-[3rem] flex items-center justify-center">
-                <span class="typewriter inline-block">{{ profile_info.title|default:"Data Scientist & Quantitative Research" }}</span>
+            <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-text-secondary min-h-[3rem] flex flex-col items-center justify-center">
+                {% with title=profile_info.title|default:"Quantitative Research  & Data Scientist & Full-Stack Developer" %}
+                    {% for part in title|split_by_ampersand %}
+                        <span class="typewriter inline-block">{% if not forloop.first %}& {% endif %}{{ part }}</span>
+                    {% endfor %}
+                {% endwith %}
             </div>
         </div>
     </section>

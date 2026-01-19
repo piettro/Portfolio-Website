@@ -182,3 +182,13 @@ def set_language_for_obj(obj, language):
     """
     obj._current_language = language
     return ""
+
+@register.filter
+def split_by_ampersand(value):
+    """
+    Divide uma string por '&' e retorna uma lista
+    Uso: {{ title|split_by_ampersand }}
+    """
+    if not value:
+        return []
+    return [part.strip() for part in str(value).split('&') if part.strip()]

@@ -69,7 +69,7 @@ def index(request):
             'location': 'Madrid, Spain',
             'github': 'https://github.com/piettro',
             'linkedin': 'https://www.linkedin.com/in/piettro-rodrigues/',
-            'title': 'Data Scientist & Quantitative Research',
+            'title': 'Quantitative Research & Data Scientist & Full-Stack Developer',
             'phone': '+34 687 708 201',
             'blog_url': 'https://github.com/piettro'  # Adicione a URL do seu blog aqui
         }
