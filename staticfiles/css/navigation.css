@@ -50,8 +50,10 @@
   z-index: 50;
   width: auto;
   max-width: 90%;
-  padding: 0;
-  background: transparent;
+  padding: 0.5rem 1.5rem;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 9999px;
   transition: all 0.3s ease;
 }
 
@@ -63,15 +65,74 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
+/* Light theme nav-fixed */
+body.light .nav-fixed {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Light theme nav-fixed scrolled */
+body.light .nav-fixed.scrolled {
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* Ensure nav container is visible */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .nav-link {
-  color: white;
+  color: white !important;
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .nav-link:hover {
-  color: var(--accent-purple);
+  color: var(--accent-purple) !important;
+}
+
+/* Light theme nav links */
+body.light .nav-link {
+  color: var(--text-primary) !important;
+}
+
+body.light .nav-link:hover {
+  color: var(--accent-purple) !important;
+}
+
+/* Ensure nav links are always visible */
+.nav-fixed .nav-link {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+}
+
+/* Ensure nav container and its children are visible */
+.nav-fixed {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure navigation links are visible on desktop */
+@media (min-width: 768px) {
+  .nav-fixed nav[role="navigation"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .nav-fixed .hidden.md\:flex {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 }
 
 .download-cv-btn {
@@ -143,7 +204,7 @@
   min-height: calc(100vh - 64px) !important;
   margin: 0 !important;
   padding: 0 !important;
-  z-index: 40;
+  z-index: 9998 !important;
   box-sizing: border-box;
   overflow: hidden;
   transform: none !important;
@@ -169,6 +230,11 @@
   padding: 0 !important;
   box-sizing: border-box;
   transform: none !important;
+}
+
+/* Light theme mobile menu overlay */
+body.light #mobile-menu .mobile-menu-overlay {
+  background: rgba(255, 255, 255, 0.75) !important;
 }
 
 #mobile-menu .mobile-menu-content {
@@ -199,6 +265,11 @@
   height: 1px;
   background: rgba(255, 255, 255, 0.1);
   margin: 0.5rem 0;
+}
+
+/* Light theme mobile menu divider */
+body.light .mobile-menu-divider {
+  background: rgba(0, 0, 0, 0.1) !important;
 }
 
 .mobile-menu {
@@ -235,6 +306,19 @@
   margin: 0 auto;
 }
 
+/* Light theme mobile nav links */
+body.light #mobile-menu .mobile-nav-link {
+  color: var(--text-primary) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light #mobile-menu .mobile-nav-link:hover {
+  background: rgba(168, 85, 247, 0.15) !important;
+  border-color: var(--accent-purple) !important;
+  color: var(--accent-purple) !important;
+}
+
 #mobile-menu .mobile-nav-link:hover {
   background: rgba(168, 85, 247, 0.2) !important;
   border-color: var(--accent-purple);
@@ -267,6 +351,47 @@
 }
 
 /* Mobile Button */
+.mobile-menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.mobile-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-purple);
+  transform: scale(1.05);
+}
+
+.mobile-menu-icon {
+  font-size: 1.25rem;
+  color: white;
+  transition: color 0.3s;
+}
+
+/* Light theme mobile button */
+body.light .mobile-menu-button {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light .mobile-menu-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-purple);
+}
+
+body.light .mobile-menu-icon {
+  color: var(--text-primary) !important;
+}
+
 .mobile-menu-btn {
   display: flex;
   align-items: center;
