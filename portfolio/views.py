@@ -186,36 +186,6 @@ def custom_404_view(request, exception=None):
     
     return render(request, '404.html', context, status=404)
 
-def test_404_page(request):
-    """
-    Test view to preview the 404 page (only works when DEBUG=True).
-    Remove this view in production or protect it with authentication.
-    """
-    # Only allow in DEBUG mode for security
-    if not settings.DEBUG:
-        return HttpResponseNotFound("404 page test not available in production")
-    
-    # Get current language from session
-    current_language = request.session.get('preferred_language', 'en')
-    if current_language not in ['en', 'es', 'pt']:
-        current_language = 'en'
-    
-    context = {
-        'current_language': current_language,
-        'profile_info': {
-            'name': 'Piettro Rodrigues',
-            'email': 'piettroenrico@hotmail.com',
-            'location': 'Madrid, Spain',
-            'github': 'https://github.com/piettro',
-            'linkedin': 'https://www.linkedin.com/in/piettro-rodrigues/',
-            'title': 'Quantitative Research & Data Scientist & Full-Stack Developer',
-            'phone': '+34 687 708 201',
-            'blog_url': 'https://github.com/piettro'
-        }
-    }
-    
-    return render(request, '404.html', context, status=404)
-
 def set_language_custom(request):
     """
     View personalizada para troca de idioma

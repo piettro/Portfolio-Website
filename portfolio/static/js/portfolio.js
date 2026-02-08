@@ -74,7 +74,15 @@ const translations = {
         'follow_me':'Follow Me',
         'schedule_call':'Schedule a Call',
         'interested_working_together': 'Interested in working together?',
-        'professional_journey': 'Professional Journey'
+        'professional_journey': 'Professional Journey',
+        'page_not_found': 'Page Not Found',
+        'page_not_found_description': "Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or the URL might be incorrect.",
+        'go_home': 'Go Home',
+        'go_back': 'Go Back',
+        'need_help': 'Need Help?',
+        '404_help_text': 'If you believe this is an error, please feel free to contact me or visit the homepage to explore my portfolio.',
+        'visit_homepage': 'Visit Homepage',
+        'view_projects': 'View Projects'
     },
     'es': {
         'featured_projects': 'Proyectos Destacados',
@@ -150,7 +158,15 @@ const translations = {
         'follow_me':'Sígueme',
         'schedule_call':'Programar una Llamada',
         'interested_working_together':'¿Interesado en trabajar juntos?',
-        'professional_journey': 'Jornada Profesional'
+        'professional_journey': 'Jornada Profesional',
+        'page_not_found': 'Página No Encontrada',
+        'page_not_found_description': '¡Oops! La página que buscas no existe. Puede haber sido movida, eliminada o la URL podría ser incorrecta.',
+        'go_home': 'Ir al Inicio',
+        'go_back': 'Volver',
+        'need_help': '¿Necesitas Ayuda?',
+        '404_help_text': 'Si crees que esto es un error, no dudes en contactarme o visita la página de inicio para explorar mi portafolio.',
+        'visit_homepage': 'Visitar Página de Inicio',
+        'view_projects': 'Ver Proyectos'
     },
     'pt': {
         'featured_projects': 'Projetos em Destaque',
@@ -226,7 +242,15 @@ const translations = {
         'follow_me':'Siga-me',
         'schedule_call':'Agendar uma Chamada',
         'interested_working_together': 'Interessado em trabalhar juntos?',
-        'professional_journey': 'Jornada Profissional'
+        'professional_journey': 'Jornada Profissional',
+        'page_not_found': 'Página Não Encontrada',
+        'page_not_found_description': 'Ops! A página que você está procurando não existe. Ela pode ter sido movida, deletada ou a URL pode estar incorreta.',
+        'go_home': 'Ir para o Início',
+        'go_back': 'Voltar',
+        'need_help': 'Precisa de Ajuda?',
+        '404_help_text': 'Se você acredita que isso é um erro, sinta-se à vontade para entrar em contato comigo ou visitar a página inicial para explorar meu portfólio.',
+        'visit_homepage': 'Visitar Página Inicial',
+        'view_projects': 'Ver Projetos'
     }
 };
 
@@ -249,6 +273,37 @@ function translateStaticTexts(lang) {
             element.placeholder = langTranslations[key];
         }
     });
+    
+    // Update "View All" buttons text based on their current state
+    // View All Projects
+    const viewAllProjectsText = document.getElementById('viewAllText');
+    if (viewAllProjectsText) {
+        if (showingAllProjects) {
+            viewAllProjectsText.textContent = langTranslations['show_less'] || 'Show Less';
+        } else {
+            viewAllProjectsText.textContent = langTranslations['view_all_projects'] || 'View All Projects';
+        }
+    }
+    
+    // View All Experiences
+    const viewAllExperiencesBtn = document.getElementById('viewAllExperiencesBtn');
+    if (viewAllExperiencesBtn) {
+        if (showingAllExperiences) {
+            viewAllExperiencesBtn.textContent = langTranslations['show_less'] || 'Show Less';
+        } else {
+            viewAllExperiencesBtn.textContent = langTranslations['view_all_experiences'] || 'View All Experiences';
+        }
+    }
+    
+    // View All Certifications
+    const viewAllCertificationsText = document.getElementById('viewAllCertificationsText');
+    if (viewAllCertificationsText) {
+        if (showingAllCertifications) {
+            viewAllCertificationsText.textContent = langTranslations['show_less'] || 'Show Less';
+        } else {
+            viewAllCertificationsText.textContent = langTranslations['view_all_certifications'] || 'View All Certificates';
+        }
+    }
 }
 
 // Carousel state
@@ -724,6 +779,46 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // Experience visibility control
 let showingAllExperiences = false;
 
+// Toggle All Certifications Visibility
+let showingAllCertifications = false;
+
+function toggleAllCertifications() {
+    const certifications = document.querySelectorAll('.certification-card.hidden-by-default');
+    const viewAllBtn = document.getElementById('viewAllCertificationsBtn');
+    const viewAllText = document.getElementById('viewAllCertificationsText');
+    const viewAllIcon = document.getElementById('viewAllCertificationsIcon');
+    const langTranslations = translations[currentLanguage] || translations['en'];
+    
+    showingAllCertifications = !showingAllCertifications;
+    
+    // Update aria-expanded for accessibility
+    if (viewAllBtn) {
+        viewAllBtn.setAttribute('aria-expanded', showingAllCertifications);
+    }
+    
+    // Show/hide certifications
+    certifications.forEach(cert => {
+        if (showingAllCertifications) {
+            cert.style.display = 'block';
+            cert.classList.add('fade-in');
+        } else {
+            cert.style.display = 'none';
+            cert.classList.remove('fade-in');
+        }
+    });
+    
+    // Update button text and icon
+    if (viewAllText && viewAllIcon) {
+        if (showingAllCertifications) {
+            viewAllText.textContent = langTranslations['show_less'] || 'Show Less';
+            viewAllIcon.style.transform = 'rotate(180deg)';
+        } else {
+            viewAllText.textContent = langTranslations['view_all_certifications'] || 'View All Certificates';
+            viewAllIcon.style.transform = 'rotate(0deg)';
+        }
+    }
+}
+
 function toggleAllExperiences() {
     const experiences = document.querySelectorAll('.experience-card');
     const viewAllBtn = document.getElementById('viewAllExperiencesBtn');
@@ -802,21 +897,99 @@ document.querySelectorAll('.toggle-details').forEach(btn => {
 });
 
 // Smooth Scroll for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        // Allow non-anchor links like "#" or external
-        if (!href || href === '#') return;
-        const target = document.querySelector(href);
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            // Allow non-anchor links like "#" or external
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                // Calculate offset for fixed header (approximately 100px to account for nav height + padding)
+                const headerOffset = 100;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Initialize smooth scroll when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSmoothScroll);
+} else {
+    initSmoothScroll();
+}
+
+// Handle hash navigation when page loads (e.g., from 404 page)
+function handleHashScroll() {
+    const hash = window.location.hash;
+    if (hash && hash !== '#') {
+        const target = document.querySelector(hash);
         if (target) {
-            e.preventDefault();
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            // Calculate offset for fixed header (approximately 100px)
+            const headerOffset = 100;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
             });
         }
-    });
-});
+    }
+}
+
+// Initialize hash scroll on page load
+// Try multiple times to ensure it works even if page is still loading
+function initHashScroll() {
+    // Function to attempt scroll
+    function attemptScroll() {
+        const hash = window.location.hash;
+        if (hash && hash !== '#') {
+            const target = document.querySelector(hash);
+            if (target) {
+                // Check if main content is visible (loader might be hiding it)
+                const mainContent = document.getElementById('main-content');
+                if (mainContent && mainContent.classList.contains('hidden')) {
+                    // Wait for loader to hide
+                    const observer = new MutationObserver(function(mutations) {
+                        if (!mainContent.classList.contains('hidden')) {
+                            setTimeout(handleHashScroll, 300);
+                            observer.disconnect();
+                        }
+                    });
+                    observer.observe(mainContent, { attributes: true, attributeFilter: ['class'] });
+                } else {
+                    handleHashScroll();
+                }
+            }
+        }
+    }
+    
+    // Try immediately if DOM is ready
+    if (document.readyState === 'complete') {
+        setTimeout(attemptScroll, 100);
+    } else {
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(attemptScroll, 100);
+        });
+        
+        // Also try after page fully loads (in case DOMContentLoaded already fired)
+        window.addEventListener('load', function() {
+            setTimeout(attemptScroll, 300);
+        });
+    }
+}
+
+initHashScroll();
 
 // Navbar Scroll Effect - Add pill background when scrolling
 const mainNav = document.getElementById('mainNav');
@@ -1209,10 +1382,10 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuButton.setAttribute('aria-label', isHidden ? 'Close navigation menu' : 'Open navigation menu');
             
             if (mobileMenu.classList.contains('hidden')) {
-                icon.className = 'fas fa-bars text-xl text-black dark:text-white';
+                icon.className = 'fas fa-bars mobile-menu-icon';
                 document.body.style.overflow = '';
             } else {
-                icon.className = 'fas fa-times text-xl text-black dark:text-white';
+                icon.className = 'fas fa-times mobile-menu-icon';
                 document.body.style.overflow = 'hidden';
             }
         });
@@ -1226,7 +1399,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     mobileMenuButton.setAttribute('aria-expanded', 'false');
                     mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
                     const icon = mobileMenuButton.querySelector('i');
-                    icon.className = 'fas fa-bars text-xl text-black dark:text-white';
+                    icon.className = 'fas fa-bars mobile-menu-icon';
                     document.body.style.overflow = '';
                 }
             });
@@ -1236,7 +1409,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
             link.addEventListener('click', function() {
                 mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl text-black dark:text-white';
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars mobile-menu-icon';
                 document.body.style.overflow = '';
             });
         });
@@ -1248,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars mobile-menu-icon';
                 document.body.style.overflow = '';
             }
         });
@@ -1257,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
                 mobileMenu.classList.add('hidden');
-                mobileMenuButton.querySelector('i').className = 'fas fa-bars text-xl';
+                mobileMenuButton.querySelector('i').className = 'fas fa-bars mobile-menu-icon';
                 document.body.style.overflow = '';
             }
         });

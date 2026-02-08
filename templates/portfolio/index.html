@@ -912,39 +912,13 @@
         };
 
         // Toggle All Certifications Function
-        function toggleAllCertifications() {
-            const hiddenCertifications = document.querySelectorAll('.certification-card.hidden-by-default');
-            const btn = document.getElementById('viewAllCertificationsBtn');
-            const btnText = document.getElementById('viewAllCertificationsText');
-            const btnIcon = document.getElementById('viewAllCertificationsIcon');
-            const isShowing = btnText.textContent.includes('View All');
-
-            hiddenCertifications.forEach(cert => {
-                if (isShowing) {
-                    cert.style.display = 'block';
-                    cert.classList.add('fade-in');
-                } else {
-                    cert.style.display = 'none';
-                    cert.classList.remove('fade-in');
-                }
-            });
-
-            if (isShowing) {
-                btnText.textContent = 'Show Less';
-                btnIcon.style.transform = 'rotate(180deg)';
-            } else {
-                btnText.textContent = 'View All Certificates';
-                btnIcon.style.transform = 'rotate(0deg)';
-            }
-        }
-
         // Initialize Certifications View
         document.addEventListener('DOMContentLoaded', function() {
             const allCertifications = document.querySelectorAll('.certification-card');
             const hiddenCertifications = document.querySelectorAll('.certification-card.hidden-by-default');
             const viewAllBtn = document.getElementById('viewAllCertificationsBtn');
             
-            if (hiddenCertifications.length > 0) {
+            if (hiddenCertifications.length > 0 && viewAllBtn) {
                 viewAllBtn.style.display = 'flex';
                 hiddenCertifications.forEach(cert => {
                     cert.style.display = 'none';

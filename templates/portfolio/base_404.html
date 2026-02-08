@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}404 - Page Not Found | Piettro Rodrigues{% endblock %}</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical CSS inline ou load first -->
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    
+    <!-- Non-critical CSS with media attribute for async loading -->
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/load.css' %}">
+    
+    <!-- External CSS with async loading -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-bg-primary text-text-primary antialiased">
+    <!-- Loading Spinner -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <div class="spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="loader-text">
+                <span class="loader-name">Piettro</span>
+                <span class="loader-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (hidden initially) -->
+    <div id="main-content" class="main-content hidden">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Load Tailwind with inline config for better performance -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind immediately after loading
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': '#0a0a0a',
+                        'bg-secondary': '#0b0218',
+                        'text-primary': '#ededed',
+                        'text-secondary': '#a3a3a3',
+                        'accent-purple': '#a855f7',
+                        'accent-teal': '#14b8a6',
+                        'accent-red': '#ef4444',
+                    }
+                }
+            }
+        };
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Page Loader Script -->
+    <script>
+        // Hide page loader when everything is loaded
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.getElementById('page-loader');
+                const mainContent = document.getElementById('main-content');
+                
+                if (loader && mainContent) {
+                    loader.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    setTimeout(function() {
+                        loader.style.display = 'none';
+                    }, 500);
+                }
+            }, 300);
+        });
+        
+        // Fallback: if page is already loaded (from cache), hide loader immediately
+        if (document.readyState === 'complete') {
+            const loader = document.getElementById('page-loader');
+            const mainContent = document.getElementById('main-content');
+            
+            if (loader && mainContent) {
+                loader.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }
+        }
+    </script>
+    
+    <script src="{% static 'js/portfolio.js' %}" defer></script>
+</body>
+</html>

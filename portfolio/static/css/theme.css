@@ -332,6 +332,39 @@ body.light .glass button.text-white {
   color: var(--text-primary) !important;
 }
 
+/* View All Certifications Button - Light Theme */
+body.light #viewAllCertificationsBtn {
+  color: var(--text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light #viewAllCertificationsBtn:hover {
+  border-color: var(--accent-purple) !important;
+  color: var(--accent-purple) !important;
+}
+
+/* View All Projects Button - Light Theme */
+body.light #viewAllProjectsBtn {
+  color: var(--text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light #viewAllProjectsBtn:hover {
+  border-color: var(--accent-purple) !important;
+  color: var(--accent-purple) !important;
+}
+
+/* View All Experiences Button - Light Theme */
+body.light #viewAllExperiencesBtn {
+  color: var(--text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light #viewAllExperiencesBtn:hover {
+  border-color: var(--accent-purple) !important;
+  color: var(--accent-purple) !important;
+}
+
 body.light .glass .bg-white\/5 {
   background: rgba(0, 0, 0, 0.05) !important;
 }

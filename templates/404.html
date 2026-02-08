@@ -1,4 +1,4 @@
-{% extends 'portfolio/base.html' %}
+{% extends 'portfolio/base_404.html' %}
 {% load static %}
 
 {% block title %}404 - Page Not Found | Piettro Rodrigues{% endblock %}
@@ -37,56 +37,127 @@
                 <i class="fas fa-home" aria-hidden="true"></i>
                 <span data-i18n="go_home">Go Home</span>
             </a>
+            
+            <a href="{% url 'index' %}#contact" 
+               class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-all inline-flex items-center justify-center gap-2 font-semibold text-text-primary"
+               aria-label="Go to contact section">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <span data-i18n="contact_me">Contact Me</span>
+            </a>
+            
+            <button onclick="window.history.back()" 
+                    class="px-8 py-3 rounded-full glass border border-white/10 hover:border-accent-purple hover:bg-white/5 transition-all inline-flex items-center justify-center gap-2 font-semibold text-text-primary"
+                    aria-label="Go back to previous page">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span data-i18n="go_back">Go Back</span>
+            </button>
+        </div>
+        
+        <!-- Additional Help -->
+        <div class="mt-12 glass rounded-[20px] p-6 max-w-2xl mx-auto">
+            <h3 class="text-xl font-semibold mb-4 text-text-primary" data-i18n="need_help">
+                Need Help?
+            </h3>
+            <p class="text-text-secondary mb-4" data-i18n="404_help_text">
+                If you believe this is an error, please feel free to contact me or visit the homepage to explore my portfolio.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{% url 'index' %}" 
+                   class="text-accent-purple hover:text-purple-400 transition-colors inline-flex items-center gap-2"
+                   aria-label="Visit homepage">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <span data-i18n="visit_homepage">Visit Homepage</span>
+                </a>
+                <span class="text-text-secondary">|</span>
+                <a href="{% url 'index' %}#projects" 
+                   class="text-accent-purple hover:text-purple-400 transition-colors inline-flex items-center gap-2"
+                   aria-label="View projects">
+                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                    <span data-i18n="view_projects">View Projects</span>
+                </a>
+                <span class="text-text-secondary">|</span>
+                <a href="{% url 'index' %}#about" 
+                   class="text-accent-purple hover:text-purple-400 transition-colors inline-flex items-center gap-2"
+                   aria-label="Learn about me">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <span data-i18n="about_me">About Me</span>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Add translations for 404 page -->
+<!-- Use main translation system from portfolio.js -->
 <script>
-    const errorTranslations = {
-        'en': {
-            'page_not_found': 'Page Not Found',
-            'page_not_found_description': "Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or the URL might be incorrect.",
-            'go_home': 'Go Home',
-            'contact_me': 'Contact Me',
-            'go_back': 'Go Back',
-            'need_help': 'Need Help?',
-            '404_help_text': 'If you believe this is an error, please feel free to contact me or visit the homepage to explore my portfolio.',
-            'visit_homepage': 'Visit Homepage',
-            'view_projects': 'View Projects',
-            'about_me': 'About Me'
-        },
-        'es': {
-            'page_not_found': 'Página No Encontrada',
-            'page_not_found_description': '¡Oops! La página que buscas no existe. Puede haber sido movida, eliminada o la URL podría ser incorrecta.',
-            'go_home': 'Ir al Inicio',
-            'contact_me': 'Contáctame',
-            'go_back': 'Volver',
-            'need_help': '¿Necesitas Ayuda?',
-            '404_help_text': 'Si crees que esto es un error, no dudes en contactarme o visita la página de inicio para explorar mi portafolio.',
-            'visit_homepage': 'Visitar Página de Inicio',
-            'view_projects': 'Ver Proyectos',
-            'about_me': 'Sobre Mí'
-        },
-        'pt': {
-            'page_not_found': 'Página Não Encontrada',
-            'page_not_found_description': 'Ops! A página que você está procurando não existe. Ela pode ter sido movida, deletada ou a URL pode estar incorreta.',
-            'go_home': 'Ir para o Início',
-            'contact_me': 'Entre em Contato',
-            'go_back': 'Voltar',
-            'need_help': 'Precisa de Ajuda?',
-            '404_help_text': 'Se você acredita que isso é um erro, sinta-se à vontade para entrar em contato comigo ou visitar a página inicial para explorar meu portfólio.',
-            'visit_homepage': 'Visitar Página Inicial',
-            'view_projects': 'Ver Projetos',
-            'about_me': 'Sobre Mim'
-        }
-    };
-
-    // Translate 404 page on load
+    // Translate 404 page on load using main translation system
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLanguage = localStorage.getItem('language') || 'en';
-        const langTranslations = errorTranslations[savedLanguage] || errorTranslations['en'];
+        // Get saved language from localStorage
+        const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
         
+        // Try to use main translation system from portfolio.js
+        function tryTranslate() {
+            if (typeof translations !== 'undefined') {
+                // Use main translation system
+                const langTranslations = translations[savedLanguage] || translations['en'];
+                translate404PageWithTranslations(langTranslations);
+            } else {
+                // Fallback: use local translations
+                translate404PageWithLanguage(savedLanguage);
+            }
+        }
+        
+        // Try immediately
+        tryTranslate();
+        
+        // Also try after a short delay in case portfolio.js is still loading
+        setTimeout(tryTranslate, 200);
+    });
+    
+    function translate404PageWithLanguage(lang) {
+        // Fallback translations if portfolio.js is not available
+        const fallbackTranslations = {
+            'en': {
+                'page_not_found': 'Page Not Found',
+                'page_not_found_description': "Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or the URL might be incorrect.",
+                'go_home': 'Go Home',
+                'go_back': 'Go Back',
+                'need_help': 'Need Help?',
+                '404_help_text': 'If you believe this is an error, please feel free to contact me or visit the homepage to explore my portfolio.',
+                'visit_homepage': 'Visit Homepage',
+                'view_projects': 'View Projects',
+                'about_me': 'About Me',
+                'contact_me': 'Contact Me'
+            },
+            'es': {
+                'page_not_found': 'Página No Encontrada',
+                'page_not_found_description': '¡Oops! La página que buscas no existe. Puede haber sido movida, eliminada o la URL podría ser incorrecta.',
+                'go_home': 'Ir al Inicio',
+                'go_back': 'Volver',
+                'need_help': '¿Necesitas Ayuda?',
+                '404_help_text': 'Si crees que esto es un error, no dudes en contactarme o visita la página de inicio para explorar mi portafolio.',
+                'visit_homepage': 'Visitar Página de Inicio',
+                'view_projects': 'Ver Proyectos',
+                'about_me': 'Sobre Mí',
+                'contact_me': 'Contáctame'
+            },
+            'pt': {
+                'page_not_found': 'Página Não Encontrada',
+                'page_not_found_description': 'Ops! A página que você está procurando não existe. Ela pode ter sido movida, deletada ou a URL pode estar incorreta.',
+                'go_home': 'Ir para o Início',
+                'go_back': 'Voltar',
+                'need_help': 'Precisa de Ajuda?',
+                '404_help_text': 'Se você acredita que isso é um erro, sinta-se à vontade para entrar em contato comigo ou visitar a página inicial para explorar meu portfólio.',
+                'visit_homepage': 'Visitar Página Inicial',
+                'view_projects': 'Ver Projetos',
+                'about_me': 'Sobre Mim',
+                'contact_me': 'Entre em Contato'
+            }
+        };
+        const langTranslations = fallbackTranslations[lang] || fallbackTranslations['en'];
+        translate404PageWithTranslations(langTranslations);
+    }
+    
+    function translate404PageWithTranslations(langTranslations) {
         // Translate all elements with data-i18n
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
@@ -94,7 +165,7 @@
                 element.textContent = langTranslations[key];
             }
         });
-    });
+    }
 </script>
 {% endblock %}
 
